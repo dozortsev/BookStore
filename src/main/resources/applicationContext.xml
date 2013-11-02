@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <!-- Data Source properties -->
+
+    <bean id="dataSource_BookStore" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/BookStore" />
+        <property name="username" value="root" />
+        <property name="password" value="777" />
+    </bean>
+
+
+    <!-- Hibernate SessionFactory -->
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+        <property name="dataSource" ref="dataSource_BookStore" />
+
+        <property name="hibernateProperties">
+            <props>
+                <prop key="connection.pool_size">1</prop>
+                <prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="show_sql">true</prop>
+                <prop key="generate_statistics">true</prop>
+                <prop key="hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+
+        <property name="annotatedClasses">
+            <list>
+                <value>com.dozortsev.bookstore.model.Author</value>
+                <value>com.dozortsev.bookstore.model.Book</value>
+                <value>com.dozortsev.bookstore.model.Client</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- Scanning and managed components -->
+
+    <context:component-scan base-package="com.dozortsev.bookstore.model" />
+
+    <context:component-scan base-package="com.dozortsev.bookstore.data" />
+
+    <tx:annotation-driven />
+
+</beans>
