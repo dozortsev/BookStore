@@ -34,10 +34,12 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
 
         @Override public ID save(T t) {
                 try {
+                        log.info("Saving new " + getEntityName() + ".");
                         factory.getCurrentSession().save(t);
+                        log.info("Successful saved.");
 
                 } catch (HibernateException e) {
-                        e.printStackTrace();
+                        log.error("Error:", e);
                 }
                 return t.getId();
         }
@@ -45,20 +47,24 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
         @SuppressWarnings("unchecked")
         @Override public T load(ID id) {
                 try {
+                        log.info("Loading " + getEntityName() + " by Id: " + id + ".");
                         t = (T) factory.getCurrentSession().get(getEntityClass(), id);
+                        log.info("Successful loaded.");
 
                 } catch (HibernateException e) {
-                        e.printStackTrace();
+                        log.error("Error:", e);
                 }
                 return t;
         }
 
         @Override public void delete(T t) {
                 try {
+                        log.info("Deleting " + getEntityName() + ".");
                         factory.getCurrentSession().delete(t);
+                        log.info("Successful deleted.");
 
                 } catch (HibernateException e){
-                        e.printStackTrace();
+                        log.error("Error:", e);
                 }
         }
 
@@ -67,16 +73,18 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
                         delete(load(id));
 
                 } catch (HibernateException e) {
-                        e.printStackTrace();
+                        log.error("Error:", e);
                 }
         }
 
         @Override public T update(T t) {
                 try {
+                        log.info("Updating " + getEntityName() + ".");
                         factory.getCurrentSession().update(t);
+                        log.info("Successful updated.");
 
                 } catch (HibernateException e) {
-                        e.printStackTrace();
+                        log.error("Error:", e);
                 }
                 return t;
         }
@@ -86,5 +94,9 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
         }
         public void setEntityClass(Class<T> clazz) {
                 this.clazz = clazz;
+        }
+
+        private String getEntityName() {
+                return getEntityClass().getSimpleName();
         }
 }
