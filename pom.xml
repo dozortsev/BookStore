@@ -12,6 +12,8 @@
 
     <properties>
 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
 
         <org.hibernate.version>4.2.6.Final</org.hibernate.version>
@@ -28,16 +30,28 @@
 
         <org.apache.commons.version>1.4</org.apache.commons.version>
 
+        <org.junit.version>4.11</org.junit.version>
+
     </properties>
+
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <useFile>false</useFile>
                 </configuration>
             </plugin>
 
@@ -80,7 +94,8 @@
                             <url>jdbc:mysql://localhost:3306/BookStore</url>
                             <autocommit>true</autocommit>
                             <srcFiles>
-                                <srcFile>src/main/resources/bookstore.sql</srcFile>
+                                <srcFile>src/main/resources/bookstoreDDL.sql</srcFile>
+                                <srcFile>src/main/resources/bookstoreData.sql</srcFile>
                             </srcFiles>
                             <onError>abort</onError>
                         </configuration>
@@ -98,6 +113,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
 
@@ -132,7 +153,7 @@
         </dependency>
 
 
-        <!-- HIBERNATE FRAMEWORK -->
+        <!-- HIBERNATE LIBS -->
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -144,6 +165,21 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${org.hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+        </dependency>
+
+
+        <!-- JUNIT -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${org.junit.version}</version>
         </dependency>
 
 
