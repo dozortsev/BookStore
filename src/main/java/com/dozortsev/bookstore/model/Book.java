@@ -1,14 +1,17 @@
 package com.dozortsev.bookstore.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Calendar;
 
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.TemporalType.DATE;
 
-@javax.persistence.Entity
+@Entity
 @Table(name = "Book")
-public class Book extends Entity<Integer> {
+public class Book extends AbstractEntity<Integer> {
 
         @Column(name = "Name", length = 255, nullable = false)
         private String name;
@@ -25,16 +28,33 @@ public class Book extends Entity<Integer> {
 
         @Column(name = "PubDate")
         @Temporal(DATE)
-        private Date pubDate;
+        private Calendar pubDate;
 
         @Column(name = "Pages")
         private Integer pages;
 
-        @Column(name = "Price")
+        @Column(name = "Price", precision = 4, scale = 2)
         private Double price;
 
-        @Column(name = "Description")
+        @Lob @Column(name = "Description")
         private String description;
+
+
+        public Book() {
+        }
+
+        public Book(String name,  Author author, String genre, String language,
+                    Calendar pubDate, Integer pages, Double price, String description) {
+
+                this.name = name;
+                this.author = author;
+                this.genre = genre;
+                this.language = language;
+                this.pubDate = pubDate;
+                this.pages = pages;
+                this.price = price;
+                this.description = description;
+        }
 
 
         public String getName() {
@@ -65,10 +85,10 @@ public class Book extends Entity<Integer> {
                 this.language = language;
         }
 
-        public Date getPubDate() {
+        public Calendar getPubDate() {
                 return pubDate;
         }
-        public void setPubDate(Date pubDate) {
+        public void setPubDate(Calendar pubDate) {
                 this.pubDate = pubDate;
         }
 
@@ -93,3 +113,4 @@ public class Book extends Entity<Integer> {
                 this.description = description;
         }
 }
+

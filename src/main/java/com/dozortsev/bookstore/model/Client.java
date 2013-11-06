@@ -2,12 +2,18 @@ package com.dozortsev.bookstore.model;
 
 import javax.persistence.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@javax.persistence.Entity
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 @Table(name = "Client")
-public class Client extends Entity<Integer> {
+public class Client extends AbstractEntity<Integer> {
 
         @Column(name = "Name", length = 100)
         private String name;
@@ -21,19 +27,27 @@ public class Client extends Entity<Integer> {
         @Column(name = "Email", length = 200, unique = true, nullable = false)
         private String email;
 
-        @ElementCollection
-        @CollectionTable(
-                name = "ClientToBooks",
-                joinColumns = {
-                        @JoinColumn(name = "idClient"),
-                        @JoinColumn(name = "idBook")
-        })
-        @AttributeOverrides({
-                @AttributeOverride(name = "key.Book", column = @Column(name="Book")),
-                @AttributeOverride(name = "value.isBuy", column = @Column(name="isBuy"))
-        })
-        private Map<Book, Boolean> bookMap = new HashMap<>();
+        @OneToMany(fetch = EAGER, mappedBy = "clientBookId.client")
+        private List<ClientBook> books = new ArrayList<>();
 
+
+        public Client() {
+        }
+
+        public Client(String name, String surname, String password, String email) {
+                this.name = name;
+                this.surname = surname;
+                this.password = password;
+                this.email = email;
+        }
+
+        public Client(String name, String surname, String password, String email, List<ClientBook> books) {
+                this.name = name;
+                this.surname = surname;
+                this.password = password;
+                this.email = email;
+                this.books = books;
+        }
 
         public String getName() {
                 return name;
@@ -61,5 +75,12 @@ public class Client extends Entity<Integer> {
         }
         public void setEmail(String email) {
                 this.email = email;
+        }
+
+        public List<ClientBook> getBooks() {
+                return books;
+        }
+        public void setBooks(List<ClientBook> books) {
+                this.books = books;
         }
 }

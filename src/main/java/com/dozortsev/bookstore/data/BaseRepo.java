@@ -1,10 +1,10 @@
 package com.dozortsev.bookstore.data;
 
-import com.dozortsev.bookstore.model.Entity;
+import com.dozortsev.bookstore.model.AbstractEntity;
 
 import java.io.Serializable;
 
-public interface BaseRepo<ID extends Serializable, T extends Entity<ID>> {
+public interface BaseRepo<ID extends Serializable, T extends AbstractEntity<ID>> {
 
         public ID save(T model);
 
