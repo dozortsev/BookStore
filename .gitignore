@@ -1,19 +1,22 @@
+# IntelliJ IDEA #
 .idea/
 *.iml
+out/
 
-*.sublime-workspace
 
-.classpath
-.project
-.settings
-
+# Java #
 *.class
+
 
 # Package Files #
 *.jar
 *.war
 *.ear
 
+
+# Maven #
 target/
 
+
+# Linux #
 *~
