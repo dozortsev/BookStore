@@ -1,12 +1,9 @@
-package com.dozortsev.bookstore.model;
+package dozortsev.bookstore.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Calendar;
 
 import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.TemporalType.DATE;
 
 @Entity

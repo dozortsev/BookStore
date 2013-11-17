@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.dozortsev.bookstore</groupId>
+    <groupId>dozortsev.bookstore</groupId>
     <artifactId>BookStore</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
@@ -20,6 +21,8 @@
 
         <servlet.version>2.5</servlet.version>
 
+        <servlet.jsp.version>2.1</servlet.jsp.version>
+
         <servlet.jstl.version>1.2</servlet.jstl.version>
 
         <mysql.connector.version>5.1.26</mysql.connector.version>
@@ -32,81 +35,15 @@
 
         <org.junit.version>4.11</org.junit.version>
 
+        <!-- JBOSS CONFIG -->
+
+        <jboss-as.deploy.hostname>localhost</jboss-as.deploy.hostname>
+        <jboss-as.deploy.user>admin</jboss-as.deploy.user>
+        <jboss-as.deploy.pass>admin</jboss-as.deploy.pass>
+
     </properties>
 
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <useFile>false</useFile>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <warName>BookStore</warName>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sql-maven-plugin</artifactId>
-                <version>1.5</version>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.connector.version}</version>
-                    </dependency>
-                </dependencies>
-
-                <configuration>
-                    <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/BookStore</url>
-                    <username>root</username>
-                    <password>777</password>
-                </configuration>
-
-                <executions>
-                    <execution>
-                        <id>drop-and-recreate-db</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                        <configuration>
-                            <url>jdbc:mysql://localhost:3306/BookStore</url>
-                            <autocommit>true</autocommit>
-                            <srcFiles>
-                                <srcFile>src/main/resources/bookstoreDDL.sql</srcFile>
-                                <srcFile>src/main/resources/bookstoreData.sql</srcFile>
-                            </srcFiles>
-                            <onError>abort</onError>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
-
 
         <!-- SPRING FRAMEWORK -->
 
@@ -120,6 +57,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${org.springframework.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -132,6 +70,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -142,18 +86,12 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
 
 
-        <!-- HIBERNATE LIBS -->
+        <!-- HIBERNATE -->
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -180,10 +118,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${org.junit.version}</version>
+            <scope>test</scope>
         </dependency>
 
 
-        <!-- MYSQL CONNECTOR LIB -->
+        <!-- MYSQL CONNECTOR -->
 
         <dependency>
             <groupId>mysql</groupId>
@@ -207,27 +146,129 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${org.slf4j.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${com.apache.log4j.version}</version>
+            <scope>provided</scope>
         </dependency>
 
 
-        <!-- JSP LIB -->
+        <!-- SERVLET -->
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${servlet.jsp.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${servlet.jstl.version}</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
+
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <warName>${project.artifactId}</warName>
+                    <filteringDeploymentDescriptors>
+                        true
+                    </filteringDeploymentDescriptors>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.5.Final</version>
+                <executions>
+                    <!-- Undeploy the application on clean -->
+                    <execution>
+                        <id>undeploy</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>undeploy</goal>
+                        </goals>
+                        <configuration>
+                            <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.connector.version}</version>
+                    </dependency>
+                </dependencies>
+
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost:3306/BookStore</url>
+                    <username>root</username>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>drop-and-recreate-db</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost:3306/BookStore</url>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/resources/bookstoreDDL.sql</srcFile>
+                                <srcFile>src/main/resources/bookstoreData.sql</srcFile>
+                            </srcFiles>
+                            <onError>abort</onError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

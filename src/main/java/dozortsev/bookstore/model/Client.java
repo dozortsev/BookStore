@@ -1,15 +1,11 @@
-package com.dozortsev.bookstore.model;
+package dozortsev.bookstore.model;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "Client")

@@ -1,12 +1,10 @@
-package com.dozortsev.bookstore.model;
+package dozortsev.bookstore.model;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import java.io.Serializable;
-
-import static javax.persistence.CascadeType.ALL;
 
 @Embeddable
 public class ClientBookId implements Serializable {

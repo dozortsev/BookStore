@@ -1,20 +1,13 @@
-package com.dozortsev.bookstore.model;
+package dozortsev.bookstore.model;
 
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.TemporalType.DATE;
 import static org.hibernate.annotations.CascadeType.DELETE;
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;

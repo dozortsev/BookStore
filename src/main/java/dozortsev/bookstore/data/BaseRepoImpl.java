@@ -1,9 +1,10 @@
-package com.dozortsev.bookstore.data;
+package dozortsev.bookstore.data;
 
-import com.dozortsev.bookstore.model.AbstractEntity;
+import dozortsev.bookstore.model.AbstractEntity;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
+import static java.lang.String.format;
 import static org.apache.log4j.Logger.getLogger;
+import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
 @Repository
-@Transactional(rollbackFor = Exception.class)
+@Transactional(rollbackFor = Exception.class, propagation = REQUIRES_NEW)
 
 public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>> implements BaseRepo<ID, T> {
 
@@ -32,10 +35,14 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
                 this.factory = factory;
         }
 
+        public Session getSession() {
+                return factory.getCurrentSession();
+        }
+
         @Override public ID save(T t) {
                 try {
-                        log.info("Saving new " + getEntityName() + ".");
-                        factory.getCurrentSession().save(t);
+                        log.info(format("Saving new %s.", getEntityName()));
+                        getSession().save(t);
                         log.info("Successful saved.");
 
                 } catch (HibernateException e) {
@@ -47,8 +54,8 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
         @SuppressWarnings("unchecked")
         @Override public T load(ID id) {
                 try {
-                        log.info("Loading " + getEntityName() + " by Id: " + id + ".");
-                        t = (T) factory.getCurrentSession().get(getEntityClass(), id);
+                        log.info(format("Loading %s by Id: %s.", getEntityName(), id));
+                        t = (T) getSession().get(getEntityClass(), id);
                         log.info("Successful loaded.");
 
                 } catch (HibernateException e) {
@@ -59,11 +66,11 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
 
         @Override public void delete(T t) {
                 try {
-                        log.info("Deleting " + getEntityName() + ".");
-                        factory.getCurrentSession().delete(t);
+                        log.info(format("Deleting %s.", getEntityName()));
+                        getSession().delete(t);
                         log.info("Successful deleted.");
 
-                } catch (HibernateException e){
+                } catch (HibernateException e) {
                         log.error("Error:", e);
                 }
         }
@@ -79,8 +86,8 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
 
         @Override public T update(T t) {
                 try {
-                        log.info("Updating " + getEntityName() + ".");
-                        factory.getCurrentSession().update(t);
+                        log.info(format("Updating %s.", getEntityName()));
+                        getSession().update(t);
                         log.info("Successful updated.");
 
                 } catch (HibernateException e) {

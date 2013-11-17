@@ -1,11 +1,14 @@
-package com.dozortsev.bookstore.data;
+package dozortsev.bookstore.data;
 
-import com.dozortsev.bookstore.model.Author;
+import dozortsev.bookstore.model.Author;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
+
 @Repository
-@Transactional
+@Transactional(rollbackFor = Exception.class, propagation = REQUIRES_NEW)
+
 public class AuthorRepoImpl extends BaseRepoImpl<Integer, Author> implements AuthorRepo {
 
         public AuthorRepoImpl() {

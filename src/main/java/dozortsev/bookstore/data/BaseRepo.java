@@ -1,6 +1,6 @@
-package com.dozortsev.bookstore.data;
+package dozortsev.bookstore.data;
 
-import com.dozortsev.bookstore.model.AbstractEntity;
+import dozortsev.bookstore.model.AbstractEntity;
 
 import java.io.Serializable;
 

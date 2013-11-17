@@ -1,16 +1,22 @@
 <web-app version="3.0"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          metadata-complete="true">
 
+    <welcome-file-list>
+        <welcome-file>Authentication</welcome-file>
+    </welcome-file-list>
+
+    
+    
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/mvc-dispatcher-servlet.xml
         </param-value>
     </context-param>
+
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
@@ -18,16 +24,51 @@
     </listener>
 
 
+
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
+
         <servlet-class>
             org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
+
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- JSP DECLARATIONS -->
+
+    <servlet>
+        <servlet-name>Authentication</servlet-name>
+        <jsp-file>/WEB-INF/jsp/signin.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Authentication</servlet-name>
+        <url-pattern>/Authentication</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateAccount</servlet-name>
+        <jsp-file>/WEB-INF/jsp/signup.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateAccount</servlet-name>
+        <url-pattern>/CreateAccount</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <jsp-file>/WEB-INF/jsp/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/Index</url-pattern>
     </servlet-mapping>
 
 </web-app>

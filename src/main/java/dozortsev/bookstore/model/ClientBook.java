@@ -1,4 +1,4 @@
-package com.dozortsev.bookstore.model;
+package dozortsev.bookstore.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -4,6 +4,15 @@
 out/
 
 
+# Eclipse #
+*.pydevproject
+*.launch
+.metadata
+.gradle
+.settings/
+.loadpath
+
+
 # Java #
 *.class
 
@@ -20,3 +29,11 @@ target/
 
 # Linux #
 *~
+
+
+# Windows #
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
