@@ -128,26 +128,26 @@ INSERT INTO Client (Password, Email, Name, Surname)
 
 INSERT INTO ClientBook (IdClient, IdBook, isBuy)
     VALUES
-    (1, 1, false),
-    (1, 4, true),
+    (1, 1, FALSE),
+    (1, 4, TRUE),
 
-    (2, 1, true),
-    (2, 2, true),
-    (2, 3, false),
+    (2, 1, TRUE),
+    (2, 2, TRUE),
+    (2, 3, FALSE),
 
-    (3, 8, true),
-    (3, 7, true),
-    (3, 4, true),
-    (3, 5, false),
+    (3, 8, TRUE),
+    (3, 7, TRUE),
+    (3, 4, TRUE),
+    (3, 5, FALSE),
 
-    (6, 8, true),
-    (6, 3, false),
+    (6, 8, TRUE),
+    (6, 3, FALSE),
 
-    (7, 4, false),
-    (7, 2, true),
+    (7, 4, FALSE),
+    (7, 2, TRUE),
 
-    (19, 5, false),
-    (19, 6, false),
-    (19, 1, false),
+    (19, 5, FALSE),
+    (19, 6, FALSE),
+    (19, 1, FALSE),
 
-    (17, 9, true);
+    (17, 9, TRUE);

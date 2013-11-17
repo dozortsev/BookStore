@@ -7,9 +7,9 @@ USE BookStore;
 CREATE TABLE Author
 (
     Id      INT PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT,
-    Name    VARCHAR(100) NOT NULL,
-    Surname VARCHAR(100) NOT NULL,
-    DOB     DATE NOT NULL
+    Name    VARCHAR(100)           NOT NULL,
+    Surname VARCHAR(100)           NOT NULL,
+    DOB     DATE                   NOT NULL
 );
 
 
@@ -24,27 +24,33 @@ CREATE TABLE Book
     Pages       INT,
     Price       DECIMAL,
     Description LONGTEXT,
-    FOREIGN KEY (Author) REFERENCES Author (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (Author) REFERENCES Author (Id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 
 CREATE TABLE Client
 (
     Id       INT PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT,
-    Name     VARCHAR(100) NOT NULL,
-    Surname  VARCHAR(100) NOT NULL,
-    Email    VARCHAR(200) UNIQUE NOT NULL,
-    Password VARCHAR(15) UNIQUE NOT NULL
+    Name     VARCHAR(100)           NOT NULL,
+    Surname  VARCHAR(100)           NOT NULL,
+    Email    VARCHAR(200) UNIQUE    NOT NULL,
+    Password VARCHAR(15) UNIQUE     NOT NULL
 );
 
 
 CREATE TABLE ClientBook
 (
-    Id       INT NOT NULL UNIQUE NOT NULL AUTO_INCREMENT,
-    IdClient INT NOT NULL,
-    IdBook   INT NOT NULL,
+    Id       INT     NOT NULL UNIQUE NOT NULL AUTO_INCREMENT,
+    IdClient INT     NOT NULL,
+    IdBook   INT     NOT NULL,
     isBuy    BOOLEAN NOT NULL,
-    FOREIGN KEY (IdBook) REFERENCES Book (Id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (IdClient) REFERENCES Client (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (IdBook) REFERENCES Book (Id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (IdClient) REFERENCES Client (Id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
