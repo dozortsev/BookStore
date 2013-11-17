@@ -7,9 +7,9 @@ USE BookStore;
 CREATE TABLE Author
 (
     Id      INT PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT,
-    Name    VARCHAR(100),
-    Surname VARCHAR(100),
-    DOB     DATE
+    Name    VARCHAR(100) NOT NULL,
+    Surname VARCHAR(100) NOT NULL,
+    DOB     DATE NOT NULL
 );
 
 
@@ -31,10 +31,10 @@ CREATE TABLE Book
 CREATE TABLE Client
 (
     Id       INT PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT,
-    Name     VARCHAR(100),
-    Surname  VARCHAR(100),
-    Email    VARCHAR(200) UNIQUE,
-    Password VARCHAR(15) UNIQUE
+    Name     VARCHAR(100) NOT NULL,
+    Surname  VARCHAR(100) NOT NULL,
+    Email    VARCHAR(200) UNIQUE NOT NULL,
+    Password VARCHAR(15) UNIQUE NOT NULL
 );
 
 
