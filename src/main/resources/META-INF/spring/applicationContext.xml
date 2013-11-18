@@ -10,7 +10,7 @@
 
     <!-- Data Source properties -->
 
-    <bean id="DataSourceBookStore" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSourceBookStore" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/BookStore" />
@@ -22,20 +22,11 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 
-        <property name="dataSource" ref="DataSourceBookStore" />
+        <property name="dataSource" ref="dataSourceBookStore" />
+
+        <property name="configLocation"  value="META-INF/hibernate/hibernate.cfg.xml" />
 
         <property name="packagesToScan" value="dozortsev.bookstore.model" />
-
-        <property name="hibernateProperties">
-            <props>
-                <prop key="connection.pool_size">1</prop>
-                <prop key="current_session_context_class">thread</prop>
-                <prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="show_sql">true</prop>
-                <prop key="format_sql">true</prop>
-                <prop key="hbm2ddl.auto">update</prop>
-            </props>
-        </property>
     </bean>
 
 

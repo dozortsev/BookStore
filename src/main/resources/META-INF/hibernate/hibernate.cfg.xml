@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Maximum number of pooled connections -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- MySQLDialect which allows Hibernate to generate SQL optimized for a particular relational database -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Write all SQL statements to console -->
+        <property name="show_sql">true</property>
+
+        <!-- Pretty print the SQL in the log and console -->
+        <property name="format_sql">true</property>
+
+    </session-factory>
+</hibernate-configuration>
