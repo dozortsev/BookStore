@@ -11,6 +11,8 @@
 
     <name>Book Store</name>
 
+    <!-- todo: Change README.md file -->
+
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,6 +36,18 @@
         <org.apache.commons.version>1.4</org.apache.commons.version>
 
         <org.junit.version>4.11</org.junit.version>
+
+        <database.url>
+            jdbc:mysql://localhost:3306/BookStore
+        </database.url>
+
+        <database.source.ddl>
+            src/main/resources/META-INF/database/bookstoreDDL.sql
+        </database.source.ddl>
+
+        <database.source.data>
+            src/main/resources/META-INF/database/bookstoreData.sql
+        </database.source.data>
 
     </properties>
 
@@ -174,8 +188,10 @@
 
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
+
+            <!-- Maven Compiler Plugin -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -186,45 +202,50 @@
                 </configuration>
             </plugin>
 
+
+            <!-- Maven Surefire Plugin -->
+
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+            </plugin>
+
+
+            <!-- Maven WAR Plugin -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.4</version>
                 <configuration>
-                    <warName>${project.artifactId}</warName>
+                    <warName>
+                        ${project.artifactId}
+                    </warName>
                     <filteringDeploymentDescriptors>
                         true
                     </filteringDeploymentDescriptors>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12</version>
-            </plugin>
+
+            <!-- JBoss AS7 Deployment Plugin -->
 
             <plugin>
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>7.5.Final</version>
-                <executions>
-                    <!-- Undeploy the application on clean -->
-                    <execution>
-                        <id>undeploy</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>undeploy</goal>
-                        </goals>
-                        <configuration>
-                            <ignoreMissingDeployment>true</ignoreMissingDeployment>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
+
+
+            <!-- SQL Maven Plugin -->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sql-maven-plugin</artifactId>
                 <version>1.5</version>
+
+                <!-- Specify the dependent jdbc driver -->
 
                 <dependencies>
                     <dependency>
@@ -234,6 +255,8 @@
                     </dependency>
                 </dependencies>
 
+                <!-- Database configuration -->
+
                 <configuration>
                     <driver>com.mysql.jdbc.Driver</driver>
                     <url>jdbc:mysql://localhost:3306/BookStore</url>
@@ -242,17 +265,38 @@
 
                 <executions>
                     <execution>
-                        <id>drop-and-recreate-db</id>
-                        <phase>validate</phase>
+                        <id>create-db-data-for-test</id>
+                        <phase>
+                            process-test-resources
+                        </phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <url>jdbc:mysql://localhost:3306/BookStore</url>
+                            <url>${database.url}</url>
                             <autocommit>true</autocommit>
                             <srcFiles>
-                                <srcFile>src/main/resources/META-INF/database/bookstoreDDL.sql</srcFile>
-                                <srcFile>src/main/resources/META-INF/database/bookstoreData.sql</srcFile>
+                                <srcFile>${database.source.ddl}</srcFile>
+                                <srcFile>${database.source.data}</srcFile>
+                            </srcFiles>
+                            <onError>abort</onError>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>recreate-db</id>
+                        <phase>
+                            package
+                        </phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>${database.url}</url>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>${database.source.ddl}</srcFile>
+                                <srcFile>${database.source.data}</srcFile>
                             </srcFiles>
                             <onError>abort</onError>
                         </configuration>
@@ -261,5 +305,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
