@@ -11,8 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @MappedSuperclass
 public abstract class AbstractEntity<ID extends Serializable> implements Serializable {
 
-        @Id
-        @GeneratedValue(strategy = IDENTITY)
+        @Id @GeneratedValue(strategy = IDENTITY)
         @Column(name = "Id", unique = true, nullable = false)
         private ID id;
 

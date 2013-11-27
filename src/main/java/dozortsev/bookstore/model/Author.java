@@ -16,19 +16,18 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @Table(name = "Author")
 public class Author extends AbstractEntity<Integer> {
 
-        @Column(name = "Name", length = 100)
+        @Column(name = "Name", length = 100, nullable = false)
         private String name;
 
-        @Column(name = "Surname", length = 100)
+        @Column(name = "Surname", length = 100, nullable = false)
         private String surname;
 
-        @OneToMany(fetch = EAGER, mappedBy = "author") @Cascade({ SAVE_UPDATE, DELETE })
-        private List<Book> books = new ArrayList<>();
-
-        @Column(name = "DOB")
+        @Column(name = "DOB", nullable = false)
         @Temporal(DATE)
         private Calendar dob;
 
+        @OneToMany(fetch = EAGER, mappedBy = "author") @Cascade({ SAVE_UPDATE, DELETE })
+        private List<Book> books = new ArrayList<>();
 
         public Author() {
         }
@@ -72,5 +71,26 @@ public class Author extends AbstractEntity<Integer> {
         }
         public void setDob(Calendar dob) {
                 this.dob = dob;
+        }
+
+
+        @Override public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                Author author = (Author) o;
+
+                if (!dob.equals(author.dob)) return false;
+                if (!name.equals(author.name)) return false;
+                if (!surname.equals(author.surname)) return false;
+
+                return true;
+        }
+
+        @Override public int hashCode() {
+                int result = name.hashCode();
+                result = 31 * result + surname.hashCode();
+                result = 31 * result + dob.hashCode();
+                return result;
         }
 }

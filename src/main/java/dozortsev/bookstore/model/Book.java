@@ -109,5 +109,36 @@ public class Book extends AbstractEntity<Integer> {
         public void setDescription(String description) {
                 this.description = description;
         }
+
+
+        @Override public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                Book book = (Book) o;
+
+                if (!author.equals(book.author)) return false;
+                if (!description.equals(book.description)) return false;
+                if (!genre.equals(book.genre)) return false;
+                if (!language.equals(book.language)) return false;
+                if (!name.equals(book.name)) return false;
+                if (!pages.equals(book.pages)) return false;
+                if (!price.equals(book.price)) return false;
+                if (!pubDate.equals(book.pubDate)) return false;
+
+                return true;
+        }
+
+        @Override public int hashCode() {
+                int result = name.hashCode();
+                result = 31 * result + author.hashCode();
+                result = 31 * result + genre.hashCode();
+                result = 31 * result + language.hashCode();
+                result = 31 * result + pubDate.hashCode();
+                result = 31 * result + pages.hashCode();
+                result = 31 * result + price.hashCode();
+                result = 31 * result + description.hashCode();
+                return result;
+        }
 }
 

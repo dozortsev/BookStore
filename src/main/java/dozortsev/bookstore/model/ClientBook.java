@@ -53,4 +53,23 @@ public class ClientBook implements Serializable {
         public void setBuy(Boolean buy) {
                 isBuy = buy;
         }
+
+
+        @Override public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                ClientBook that = (ClientBook) o;
+
+                if (!clientBookId.equals(that.clientBookId)) return false;
+                if (!isBuy.equals(that.isBuy)) return false;
+
+                return true;
+        }
+
+        @Override public int hashCode() {
+                int result = clientBookId.hashCode();
+                result = 31 * result + isBuy.hashCode();
+                return result;
+        }
 }
