@@ -24,8 +24,6 @@
 
         <property name="dataSource" ref="dataSourceBookStore" />
 
-        <property name="configLocation"  value="META-INF/hibernate/hibernate.cfg.xml" />
-
         <property name="packagesToScan" value="dozortsev.bookstore.model" />
     </bean>
 

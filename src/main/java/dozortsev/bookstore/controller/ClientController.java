@@ -1,7 +1,12 @@
 package dozortsev.bookstore.controller;
 
+import dozortsev.bookstore.data.BookRepo;
 import dozortsev.bookstore.data.ClientRepo;
+import dozortsev.bookstore.model.Book;
 import dozortsev.bookstore.model.Client;
+import dozortsev.bookstore.model.ClientBook;
+
+import org.apache.log4j.Logger;
 
 import org.springframework.ui.Model;
 
@@ -11,58 +16,56 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
+import java.util.Set;
 
+import static org.apache.log4j.Logger.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class ClientController {
 
-        @Autowired
-        private ClientRepo clientRepo;
+        // todo Client may have 'add' add 'buy' books.
 
-        @RequestMapping(value = "/Client", method = GET)
-        public String client(Model model,
-                             @ModelAttribute Client client, BindingResult result) {
+        // todo: Add logging in controllers
 
-                //model.addAttribute("client", client);
+        // todo: Write simple test controller for using @ResponseBody annotation
 
-                return "index";
+        @Autowired BookRepo bookRepo;
+
+        @Autowired ClientRepo clientRepo;
+
+        private final static Logger log = getLogger(ClientController.class);
+
+        @RequestMapping(value = "/Welcome", method = POST)
+        public String signUp(Model view, @ModelAttribute Client client) {
+
+                Set<Book> books = bookRepo.loadAll();
+
+                for (ClientBook cb : client.getBooks())
+                        books.remove(cb.getBook());
+
+                view.addAttribute("client", client);
+                view.addAttribute("books", books);
+
+                return "bookstore";
         }
 
-        @RequestMapping(value = "/SignIn", method = POST)
-        public ModelAndView signIn(ModelAndView model,
-                             @RequestParam("email") String email,
-                             @RequestParam("pwd")   String pwd) {
+        @ModelAttribute public Client getClient(
+                @RequestParam(value = "pwd", required = false)     String pwd,
+                @RequestParam(value = "email", required = false)   String email,
+                @RequestParam(value = "name", required = false)    String name,
+                @RequestParam(value = "surname", required = false) String surname) {
 
-                Client client = clientRepo.authentication(email, pwd);
+                Client client;
 
-                if (client == null)
-                        return new ModelAndView("redirect:/SignUp");
+                if (name != null && surname != null) {
 
-                model.addObject("client", client);
-                model.setViewName("index");
-
-                return model;
+                        client = new Client(name, surname, pwd, email);
+                        clientRepo.save(client);
+                } else {
+                        client = clientRepo.authentication(email, pwd);
+                }
+                return client;
         }
-
-        @RequestMapping(value = "/SignUp", method = POST)
-        public String signUp(Model model,
-                             @RequestParam("name")    String name,
-                             @RequestParam("surname") String surname,
-                             @RequestParam("email")   String email,
-                             @RequestParam("pwd")     String pwd) {
-                
-                Client client = new Client(name, surname, pwd, email);
-
-                clientRepo.save(client);
-
-                model.addAttribute("client", client);
-
-                return "redirect:/Client";
-        }
-
-
 }

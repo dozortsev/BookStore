@@ -6,8 +6,8 @@ import org.hibernate.AssertionFailure;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class TestBookRepo extends TestContext {
 

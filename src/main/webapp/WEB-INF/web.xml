@@ -4,12 +4,9 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          metadata-complete="true">
 
-    <welcome-file-list>
-        <welcome-file>Authentication</welcome-file>
-    </welcome-file-list>
+    <display-name>BookStore WEB</display-name>
 
-    
-    
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -22,7 +19,6 @@
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
-
 
 
     <servlet>
@@ -41,7 +37,27 @@
     </servlet-mapping>
 
 
-    <!-- JSP DECLARATIONS -->
+    <!-- All requests to the encoding type of UTF-8 -->
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+    <!-- JSP & Servlet declarations -->
 
     <servlet>
         <servlet-name>Authentication</servlet-name>
@@ -53,22 +69,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>CreateAccount</servlet-name>
+        <servlet-name>SignUp</servlet-name>
         <jsp-file>/WEB-INF/jsp/signup.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CreateAccount</servlet-name>
-        <url-pattern>/CreateAccount</url-pattern>
-    </servlet-mapping>
-
-
-    <servlet>
-        <servlet-name>Index</servlet-name>
-        <jsp-file>/WEB-INF/jsp/index.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Index</servlet-name>
-        <url-pattern>/Index</url-pattern>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/SignUp</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -10,7 +10,7 @@ This project is setup to allow you to create a compliant Java EE 6 application u
 
 The example uses the `java:jboss/datasources/SpringQuickstartDS` database, configured and deployed by the application.
 
-* In `jboss-as-spring-mvc-context.xml` `<context:component-scan base-package="com.dozortsev.bookstore.controller"/>` and `<mvc:annotation-driven/>` are used to register both the non-rest and rest controllers.
+* In `jboss-as-spring-mvc-context.xml` `<context:component-scan base-package="dozortsev.bookstore.controller"/>` and `<mvc:annotation-driven/>` are used to register both the non-rest and rest controllers.
 
 * The controllers map the respective urls to methods using `@RequestMapping(url)`.
 

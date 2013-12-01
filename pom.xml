@@ -42,11 +42,11 @@
         </database.url>
 
         <database.source.ddl>
-            src/main/resources/META-INF/database/bookstoreDDL.sql
+            src/main/resources/bookstoreDDL.sql
         </database.source.ddl>
 
         <database.source.data>
-            src/main/resources/META-INF/database/bookstoreData.sql
+            src/main/resources/bookstoreData.sql
         </database.source.data>
 
     </properties>
@@ -54,6 +54,8 @@
     <dependencies>
 
         <!-- SPRING FRAMEWORK -->
+
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -188,6 +190,7 @@
 
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
 
             <!-- Maven Compiler Plugin -->
@@ -245,7 +248,7 @@
                 <artifactId>sql-maven-plugin</artifactId>
                 <version>1.5</version>
 
-                <!-- Specify the dependent jdbc driver -->
+                 <!-- Specify the dependent jdbc driver -->
 
                 <dependencies>
                     <dependency>
@@ -259,7 +262,7 @@
 
                 <configuration>
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/BookStore</url>
+                    <url>${database.url}</url>
                     <username>root</username>
                 </configuration>
 

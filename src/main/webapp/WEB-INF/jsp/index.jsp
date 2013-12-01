@@ -1,28 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ taglib prefix="c"    uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
-
 <head>
-    <title>Spring MVC Starter Application</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8">
+
+        <link href="img/icon.png" rel="icon" type="image/png">
+        <title>Book Store</title>
+
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="css/signin.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
+<table border="0">
 
-        Id: ${client.id}<br>
-        Name: ${client.name}<br>
-        Surname: ${client.surname}<br>
-        Email: ${client.email}<br>
-        Password: ${client.password}
-        <br><br>
-        Books: <br>
-        <c:forEach items="${client.books}" var="book">
-
-                ${book.book.name}<br>
+        <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Surname</td>
+        </tr>
+        <c:forEach items="${clients}" var="client">
+                <tr>
+                        <td>${client.id}</td>
+                        <td>${client.name}</td>
+                        <td>${client.surname}</td>
+                </tr>
         </c:forEach>
-
+</table>
 </body>
 </html>

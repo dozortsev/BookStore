@@ -12,14 +12,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.*;
 
 import static java.lang.String.format;
 import static org.apache.log4j.Logger.getLogger;
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
+@Transactional(rollbackFor = Throwable.class, propagation = REQUIRES_NEW)
 @Repository
-@Transactional(rollbackFor = Exception.class, propagation = REQUIRES_NEW)
-
 public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>> implements BaseRepo<ID, T> {
 
         private T t;
@@ -51,6 +51,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
                 return t.getId();
         }
 
+        @Transactional(readOnly = true)
         @SuppressWarnings("unchecked")
         @Override public T load(ID id) {
                 try {
@@ -77,7 +78,9 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
 
         @Override public void deleteById(ID id) {
                 try {
-                        delete(load(id));
+                        t = load(id);
+
+                        if (t != null) delete(t);
 
                 } catch (HibernateException e) {
                         log.error("Error:", e);
@@ -94,6 +97,21 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
                         log.error("Error:", e);
                 }
                 return t;
+        }
+
+        @Transactional(readOnly = true)
+        @SuppressWarnings("unchecked")
+        @Override public Set<T> loadAll() {
+                Set<T> set = new LinkedHashSet<>();
+                try {
+                        log.info(format("Loading all %ss", getEntityName()));
+                        set.addAll(getSession().createCriteria(getEntityClass()).list());
+                        log.info("Successful loaded. Size: " + set.size());
+
+                } catch (HibernateException e) {
+                        log.error("Error:", e);
+                }
+                return set;
         }
 
         public Class<T> getEntityClass() {

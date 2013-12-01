@@ -4,17 +4,19 @@ import dozortsev.bookstore.model.Book;
 import dozortsev.bookstore.model.Client;
 import dozortsev.bookstore.model.ClientBook;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import static dozortsev.bookstore.util.ClientUtil.getRandPassword;
+import static dozortsev.bookstore.util.Util.getRandPassword;
 import static org.junit.Assert.*;
 
 public class TestClientRepo extends TestContext {
         
-        @Test
+        @Ignore
         public void testSaveClient() {
 
                 Integer[] arrBookId = { 1, 3 };
@@ -45,7 +47,7 @@ public class TestClientRepo extends TestContext {
                         assertEquals(arrBookId[i], client.getBooks().get(i).getBook().getId());
         }
 
-        @Test
+        @Ignore
         public void testDeleteClient() {
 
              Integer idClient = 1;
@@ -55,7 +57,7 @@ public class TestClientRepo extends TestContext {
              assertNull(clientRepo.load(idClient));
         }
 
-        @Test
+        @Ignore
         public void testUpdateClient() {
 
                 Integer idClient = 2, idBook = 8;
@@ -73,7 +75,7 @@ public class TestClientRepo extends TestContext {
                 assertEquals(idBook, client.getBooks().get(index).getBook().getId());
         }
 
-        @Test
+        @Ignore
         public void testAuthentication() {
 
                 String email, pwd;
@@ -88,4 +90,37 @@ public class TestClientRepo extends TestContext {
                         assertEquals(expectedClient.getId(), client.getId());
                 }
         }
+
+        @Ignore
+        public void testLoadNotClientBooks() throws Exception {
+
+                Client client = clientRepo.load(2);
+                assertNotNull(client);
+
+                Set<Book> books = bookRepo.loadAll();
+                assertNotNull(books);
+                assertNotEquals(books.size(), 0);
+
+                List<ClientBook> clientBooks = client.getBooks();
+                assertNotNull(clientBooks);
+                assertNotEquals(clientBooks.size(), 0);
+
+                for (ClientBook clientBook : clientBooks)
+                        assertTrue(books.remove(clientBook.getBook()));
+        }
+
+        @Test
+        public void testLoadAllBook() throws Exception {
+
+                Set<Book> books = bookRepo.loadAll();
+                int size = books.size();
+
+                for (ClientBook cb : clientRepo.load(2).getBooks()) {
+
+                        books.remove(cb.getBook());
+                }
+
+                assertNotEquals(size, books.size());
+        }
 }
+
