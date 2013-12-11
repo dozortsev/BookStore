@@ -11,7 +11,7 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 @Repository
 public class AuthorRepoImpl extends BaseRepoImpl<Integer, Author> implements AuthorRepo {
 
-        public AuthorRepoImpl() {
-                setEntityClass(Author.class);
-        }
+    public AuthorRepoImpl() {
+        setEntityClass(Author.class);
+    }
 }
