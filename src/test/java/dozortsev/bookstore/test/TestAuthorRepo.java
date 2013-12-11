@@ -4,31 +4,21 @@ import dozortsev.bookstore.model.Author;
 import dozortsev.bookstore.model.Book;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class TestAuthorRepo extends TestContext {
 
-        @Test
-        public void testLoadAuthor() {
+    @Test public void testDeleteAuthor() throws Exception {
 
-                Author author = authorRepo.load(1);
+        Integer id = 2;
 
-                assertNotNull(author);
-                assertNotNull(author.getBooks());
-        }
+        Author author = authorRepo.load(id);
+        assertNotNull(author);
 
-        @Test
-        public void testDeleteAuthor() {
+        authorRepo.delete(author);
+        assertNull(authorRepo.load(id));
 
-                Integer id = 2;
-
-                authorRepo.delete(authorRepo.load(id));
-
-                assertNull(authorRepo.load(id));
-
-                for (Book book : bookRepo.loadAll())
-                        assertNotEquals(book.getAuthor().getId(), id);
-        }
+        for (Book book : bookRepo.loadAll())
+            assertNotEquals(id, book.getAuthor().getId());
+    }
 }

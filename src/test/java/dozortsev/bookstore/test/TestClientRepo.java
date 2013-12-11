@@ -1,126 +1,96 @@
 package dozortsev.bookstore.test;
 
-import dozortsev.bookstore.model.Book;
+import dozortsev.bookstore.model.Card;
 import dozortsev.bookstore.model.Client;
-import dozortsev.bookstore.model.ClientBook;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static dozortsev.bookstore.util.Util.getRandPassword;
 import static org.junit.Assert.*;
 
 public class TestClientRepo extends TestContext {
-        
-        @Ignore
-        public void testSaveClient() {
 
-                Integer[] arrBookId = { 1, 3 };
+    @Test public void testSaveClient() throws Exception {
 
-                final String name = "Martin", surname = "Fowler",
-                        pwd = getRandPassword(), email = "fowler@gmail.com";
+        String name = "Martin", surname = "Fowler",
+                pwd = "7777mario", email = "fowler@gmail.com";
 
-                Client client = new Client(name, surname, pwd, email);
+        Client client = new Client(name, surname, email, pwd);
 
-                List<ClientBook> books = new ArrayList<>();
-                books.add(new ClientBook(client, bookRepo.load(arrBookId[0]), false));
-                books.add(new ClientBook(client, bookRepo.load(arrBookId[1]), true));
+        Set<Card> cards = new LinkedHashSet<>();
+        Card card1 = new Card(client, bookRepo.load(1), false);
+        cards.add(card1);
 
-                client.setBooks(books);
+        Card card2 = new Card(client, bookRepo.load(3), true);
+        cards.add(card2);
 
-                assertNull(client.getId());
-                clientRepo.save(client);
-                assertNotNull(client.getId());
+        client.setCards(cards);
 
-                client = clientRepo.load(client.getId());
+        assertNull(client.getId());
+        clientRepo.save(client);
+        assertNotNull(client.getId());
 
-                assertEquals(name, client.getName());
-                assertEquals(surname, client.getSurname());
-                assertEquals(email, client.getEmail());
-                assertEquals(pwd, client.getPassword());
+        client = clientRepo.load(client.getId());
 
-                for (int i = 0; i < arrBookId.length; i++)
-                        assertEquals(arrBookId[i], client.getBooks().get(i).getBook().getId());
+        assertEquals(name, client.getName());
+        assertEquals(surname, client.getSurname());
+        assertEquals(email, client.getEmail());
+        assertEquals(pwd, client.getPassword());
+
+        assertTrue(client.getCards().contains(card1));
+        assertTrue(client.getCards().contains(card2));
+    }
+
+    @Test public void testDeleteClient() throws Exception {
+
+        Integer id = 1;
+
+        clientRepo.delete(clientRepo.load(id));
+
+        assertNull(clientRepo.load(id));
+
+        for (Card card : cardRepo.loadAll())
+            assertNotEquals(id, card.getClient().getId());
+    }
+
+    @Test public void testUpdateClient() throws Exception {
+
+        Integer idClient = 2, idBook = 8;
+
+        Client client = clientRepo.load(idClient);
+        assertNotNull(client);
+
+        Card card = new Card(client, bookRepo.load(idBook), true);
+        client.getCards().add(card);
+
+        client = clientRepo.update(client);
+        assertTrue(client.getCards().contains(card));
+
+        client = clientRepo.load(idClient);
+        assertTrue(client.getCards().contains(card));
+    }
+
+    @Test public void testLoadAllCards() throws Exception {
+
+        Integer id = 3;
+
+        Client client = clientRepo.load(id);
+
+        for (Card card : client.getCards())
+            assertEquals(id, card.getClient().getId());
+    }
+
+    @Test public void testAuthentication() throws Exception {
+
+        for (Client client : clientRepo.loadAll()) {
+
+            String email = client.getEmail(), pwd = client.getPassword();
+
+            Client expectedClient = clientRepo.authentication(email, pwd);
+
+            assertTrue(expectedClient.equals(client));
         }
-
-        @Ignore
-        public void testDeleteClient() {
-
-             Integer idClient = 1;
-
-             clientRepo.delete(clientRepo.load(idClient));
-
-             assertNull(clientRepo.load(idClient));
-        }
-
-        @Ignore
-        public void testUpdateClient() {
-
-                Integer idClient = 2, idBook = 8;
-
-                Book book = bookRepo.load(idBook);
-                Client client = clientRepo.load(idClient);
-                ClientBook cb = new ClientBook(client, book, true);
-
-                client.getBooks().add(cb);
-
-                client = clientRepo.update(client);
-
-                Integer index = client.getBooks().size() - 1;
-
-                assertEquals(idBook, client.getBooks().get(index).getBook().getId());
-        }
-
-        @Ignore
-        public void testAuthentication() {
-
-                String email, pwd;
-
-                for (Client client : clientRepo.loadAll()) {
-
-                        email = client.getEmail();
-                        pwd = client.getPassword();
-
-                        Client expectedClient = clientRepo.authentication(email, pwd);
-
-                        assertEquals(expectedClient.getId(), client.getId());
-                }
-        }
-
-        @Ignore
-        public void testLoadNotClientBooks() throws Exception {
-
-                Client client = clientRepo.load(2);
-                assertNotNull(client);
-
-                Set<Book> books = bookRepo.loadAll();
-                assertNotNull(books);
-                assertNotEquals(books.size(), 0);
-
-                List<ClientBook> clientBooks = client.getBooks();
-                assertNotNull(clientBooks);
-                assertNotEquals(clientBooks.size(), 0);
-
-                for (ClientBook clientBook : clientBooks)
-                        assertTrue(books.remove(clientBook.getBook()));
-        }
-
-        @Test
-        public void testLoadAllBook() throws Exception {
-
-                Set<Book> books = bookRepo.loadAll();
-                int size = books.size();
-
-                for (ClientBook cb : clientRepo.load(2).getBooks()) {
-
-                        books.remove(cb.getBook());
-                }
-
-                assertNotEquals(size, books.size());
-        }
+    }
 }
 

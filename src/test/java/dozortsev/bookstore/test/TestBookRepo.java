@@ -1,9 +1,6 @@
 package dozortsev.bookstore.test;
 
 import dozortsev.bookstore.model.Book;
-
-import org.hibernate.AssertionFailure;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -11,37 +8,27 @@ import static org.junit.Assert.assertNull;
 
 public class TestBookRepo extends TestContext {
 
-        @Test
-        public void testLoadBook() {
+    @Test public void testLoadBook() throws Exception {
 
-                Book book = bookRepo.load(1);
+        Book book = bookRepo.load(1);
 
-                assertNotNull(book);
-                assertNotNull(book.getAuthor());
-        }
+        assertNotNull(book);
+        assertNotNull(book.getAuthor());
+    }
 
-        @Test(expected = AssertionFailure.class)
-        public void testSaveBook() {
+    @Test public void testDeleteBook() throws Exception {
 
-                Book book = new Book();
-                book.setName("Thinking in Java 4th");
-                book.setAuthor(null);
+        Integer idBook = 7, idAuthor;
 
-                bookRepo.save(book);
-        }
+        Book book = bookRepo.load(idBook);
+        assertNotNull(book);
+        assertNotNull(book.getAuthor());
 
-        @Test
-        public void testDeleteBook() {
+        idAuthor = book.getAuthor().getId();
 
-                Integer idBook = 7, idAuthor;
+        bookRepo.delete(book);
+        assertNull(bookRepo.load(idBook));
 
-                Book book = bookRepo.load(idBook);
-
-                idAuthor = book.getAuthor().getId();
-
-                bookRepo.delete(book);
-                assertNull(bookRepo.load(idBook));
-
-                assertNotNull(authorRepo.load(idAuthor));
-        }
+        assertNotNull(authorRepo.load(idAuthor));
+    }
 }
