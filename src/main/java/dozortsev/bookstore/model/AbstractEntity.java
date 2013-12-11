@@ -11,14 +11,16 @@ import static javax.persistence.GenerationType.IDENTITY;
 @MappedSuperclass
 public abstract class AbstractEntity<ID extends Serializable> implements Serializable {
 
-        @Id @GeneratedValue(strategy = IDENTITY)
-        @Column(name = "Id", unique = true, nullable = false)
-        private ID id;
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "Id", unique = true, nullable = false)
+    private ID id;
 
-        public ID getId() {
-                return id;
-        }
-        public void setId(ID id) {
-                this.id = id;
-        }
+    public ID getId() {
+        return id;
+    }
+
+    public void setId(ID id) {
+        this.id = id;
+    }
 }

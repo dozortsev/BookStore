@@ -1,96 +1,79 @@
 package dozortsev.bookstore.model;
 
-import org.hibernate.annotations.Cascade;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
-import javax.persistence.*;
 import java.util.Calendar;
-import java.util.ArrayList;
-import java.util.List;
 
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.TemporalType.DATE;
-import static org.hibernate.annotations.CascadeType.DELETE;
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Entity
 @Table(name = "Author")
 public class Author extends AbstractEntity<Integer> {
 
-        @Column(name = "Name", length = 100, nullable = false)
-        private String name;
+    @Column(name = "Name", length = 100, nullable = false)
+    private String name;
 
-        @Column(name = "Surname", length = 100, nullable = false)
-        private String surname;
+    @Column(name = "Surname", length = 100, nullable = false)
+    private String surname;
 
-        @Column(name = "DOB", nullable = false)
-        @Temporal(DATE)
-        private Calendar dob;
+    @Column(name = "DOB", nullable = false)
+    @Temporal(DATE)
+    private Calendar dob;
 
-        @OneToMany(fetch = EAGER, mappedBy = "author") @Cascade({ SAVE_UPDATE, DELETE })
-        private List<Book> books = new ArrayList<>();
+    public Author() {
+    }
 
-        public Author() {
-        }
+    public Author(String name, String surname, Calendar dob) {
+        this.name = name;
+        this.surname = surname;
+        this.dob = dob;
+    }
 
-        public Author(String name, String surname, Calendar dob) {
-                this.name = name;
-                this.surname = surname;
-                this.dob = dob;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public Author(String name, String surname, List<Book> books, Calendar dob) {
-                this.name = name;
-                this.surname = surname;
-                this.books = books;
-                this.dob = dob;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public String getName() {
-                return name;
-        }
-        public void setName(String name) {
-                this.name = name;
-        }
+    public String getSurname() {
+        return surname;
+    }
 
-        public String getSurname() {
-                return surname;
-        }
-        public void setSurname(String surname) {
-                this.surname = surname;
-        }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-        public List<Book> getBooks() {
-                return books;
-        }
-        public void setBooks(List<Book> books) {
-                this.books = books;
-        }
+    public Calendar getDob() {
+        return dob;
+    }
 
-        public Calendar getDob() {
-                return dob;
-        }
-        public void setDob(Calendar dob) {
-                this.dob = dob;
-        }
+    public void setDob(Calendar dob) {
+        this.dob = dob;
+    }
 
 
-        @Override public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || getClass() != o.getClass()) return false;
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-                Author author = (Author) o;
+        Author author = (Author) o;
 
-                if (!dob.equals(author.dob)) return false;
-                if (!name.equals(author.name)) return false;
-                if (!surname.equals(author.surname)) return false;
+        if (!dob.equals(author.dob)) return false;
+        if (!name.equals(author.name)) return false;
+        if (!surname.equals(author.surname)) return false;
 
-                return true;
-        }
+        return true;
+    }
 
-        @Override public int hashCode() {
-                int result = name.hashCode();
-                result = 31 * result + surname.hashCode();
-                result = 31 * result + dob.hashCode();
-                return result;
-        }
+    @Override public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + surname.hashCode();
+        result = 31 * result + dob.hashCode();
+        return result;
+    }
 }
