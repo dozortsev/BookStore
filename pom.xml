@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>dozortsev.bookstore</groupId>
+    <groupId>com.dozortsev.bookstore</groupId>
     <artifactId>BookStore</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
@@ -54,6 +54,7 @@
     <dependencies>
 
         <!-- SPRING FRAMEWORK -->
+
 
 
 
@@ -248,7 +249,7 @@
                 <artifactId>sql-maven-plugin</artifactId>
                 <version>1.5</version>
 
-                 <!-- Specify the dependent jdbc driver -->
+                <!-- Specify the dependent jdbc driver -->
 
                 <dependencies>
                     <dependency>
@@ -270,7 +271,7 @@
                     <execution>
                         <id>create-db-data-for-test</id>
                         <phase>
-                            process-test-resources
+                            validate
                         </phase>
                         <goals>
                             <goal>execute</goal>
