@@ -2,6 +2,7 @@ package com.dozortsev.bookstore.model;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Date;
 
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.TemporalType.DATE;
@@ -25,7 +26,7 @@ public class Book extends AbstractEntity<Integer> {
 
     @Column(name = "PubDate")
     @Temporal(DATE)
-    private Calendar pubDate;
+    private Date pubDate;
 
     @Column(name = "Pages")
     private Integer pages;
@@ -41,7 +42,7 @@ public class Book extends AbstractEntity<Integer> {
     }
 
     public Book(String name, Author author, String genre, String language,
-                Calendar pubDate, Integer pages, Double price, String description) {
+                Date pubDate, Integer pages, Double price, String description) {
 
         this.name = name;
         this.author = author;
@@ -86,11 +87,11 @@ public class Book extends AbstractEntity<Integer> {
         this.language = language;
     }
 
-    public Calendar getPubDate() {
+    public Date getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(Calendar pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 

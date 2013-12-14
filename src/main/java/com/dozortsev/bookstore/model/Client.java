@@ -2,10 +2,7 @@ package com.dozortsev.bookstore.model;
 
 import org.hibernate.annotations.Cascade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -23,7 +20,11 @@ public class Client extends AbstractEntity<Integer> {
     @Column(name = "Surname", length = 100, nullable = false)
     private String surname;
 
-    /* todo: add phone number field */
+    @Column(name = "Address", length = 200)
+    private String address;
+
+    @Column(name = "Phone", length = 10)
+    private String phone;
 
     @Column(name = "Email", length = 200, unique = true, nullable = false)
     private String email;
@@ -39,25 +40,18 @@ public class Client extends AbstractEntity<Integer> {
     public Client() {
     }
 
-    public Client(String name, String surname, String email, String password) {
+    public Client(String name, String surname, String phone, String address, String email, String password) {
         this.name = name;
         this.surname = surname;
+        this.phone = phone;
+        this.address = address;
         this.email = email;
         this.password = password;
-    }
-
-    public Client(String name, String surname, String email, String password, Set<Card> cards) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.cards = cards;
     }
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -65,15 +59,27 @@ public class Client extends AbstractEntity<Integer> {
     public String getSurname() {
         return surname;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -81,7 +87,6 @@ public class Client extends AbstractEntity<Integer> {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -89,7 +94,6 @@ public class Client extends AbstractEntity<Integer> {
     public Set<Card> getCards() {
         return cards;
     }
-
     public void setCards(Set<Card> cards) {
         this.cards = cards;
     }
@@ -112,7 +116,7 @@ public class Client extends AbstractEntity<Integer> {
     @Override public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + surname.hashCode();
-        result = 31 * result + email.hashCode();
+        result = 31 * result + phone.hashCode();
         result = 31 * result + password.hashCode();
         return result;
     }

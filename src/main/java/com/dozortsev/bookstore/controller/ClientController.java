@@ -8,13 +8,11 @@ import com.dozortsev.bookstore.model.Client;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import static com.dozortsev.bookstore.util.Util.isClientValid;
 import static com.dozortsev.bookstore.util.Util.removeAll;
 import static java.lang.String.format;
 import static org.apache.log4j.Logger.getLogger;
@@ -22,108 +20,52 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
+@SessionAttributes("currClient")
 public class ClientController {
-
-    private final static Logger log = getLogger(ClientController.class);
 
     @Autowired
     CardRepo cardRepo;
     @Autowired
-    BookRepo bookRepo;
-    @Autowired
     ClientRepo clientRepo;
+    @Autowired
+    BookRepo bookRepo;
 
-    @ModelAttribute("client")
-    public Client client(
-            @RequestParam(required = false) Integer id,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String pwd) {
+    private final static Logger log = getLogger(ClientController.class);
 
-        log.info(format("Client data; Id: %s, Email: %s, Password: %s.", id, email, pwd));
+    @RequestMapping(value = "/toShowcase", method = GET)
+    public String backToShowcase(Model model,
+                                 @ModelAttribute("currClient") Client client) {
 
-        if (id != null) return clientRepo.load(id);
+        model.addAttribute("allBooks", removeAll(bookRepo.loadAll(), client));
 
-        if (email != null && pwd != null)
-            return clientRepo.authentication(email, pwd);
-
-        log.info("Create new Client instance.");
-        return new Client();
+        return "redirect:/Showcase";
     }
 
-    @RequestMapping(value = "/Welcome", method = POST)
-    public ModelAndView signIn(@ModelAttribute("client") Client client) {
-
-        log.info("In signIn method.");
-
-        if (client == null)
-            return new ModelAndView("signin");
-
-        log.info("Client not null.");
-
-        if (isClientValid(client)) {
-
-            log.info("Client valid.");
-            clientRepo.save(client);
-        }
-        ModelAndView mav = new ModelAndView("bookstore");
-
-        mav.addObject("books", removeAll(bookRepo.loadAll(), client));
-        mav.addObject("client", client);
-
-        return mav;
-    }
-
-    @RequestMapping(value = "/Welcome", method = GET)
-    public ModelAndView clientBuyBook(@RequestParam("idBook") Integer idBook,
-                                      @RequestParam("idClient") Integer idClient,
-                                      @RequestParam("status") Boolean status) {
-
-        Client client = clientRepo.load(idClient);
-
-        client.getCards().add(new Card(client, bookRepo.load(idBook), status));
-
-        ModelAndView mav = new ModelAndView("bookstore");
-        mav.addObject("books", removeAll(bookRepo.loadAll(), client));
-        mav.addObject("client", clientRepo.update(client));
-
-        return mav;
-    }
-
-    @RequestMapping(value = "/Client/{id}", method = GET)
-    public ModelAndView client(@PathVariable Integer id) {
-
-        return new ModelAndView("client", "client", clientRepo.load(id));
-    }
-
-    @RequestMapping(value = "/Client/Update", method = POST)
-    public ModelAndView clientEdit(@ModelAttribute("clientEdit") Client client) {
-
-        clientRepo.update(client);
-        ModelAndView mav = new ModelAndView("redirect:/Client/{id}");
-        mav.addObject("id", client.getId());
-
-        return mav;
-    }
-
-    @RequestMapping(value = "/Client/{clientId}/Card/{cardId}", method = GET)
-    public ModelAndView card(@PathVariable Integer clientId,
-                             @PathVariable Integer cardId,
-                             @RequestParam Boolean status) {
+    @RequestMapping(value = "/Client/Card/{cardId}", method = GET)
+    public ModelAndView cardAction(@PathVariable Integer cardId,
+                                   @RequestParam Boolean status) {
 
         Card card = cardRepo.load(cardId);
+        Client client = card.getClient();
 
         if (status) {
             card.setStatus(true);
             cardRepo.update(card);
+            client = card.getClient();
         } else {
+            client.getCards().remove(card);
             cardRepo.delete(card);
         }
-        return new ModelAndView("client", "client", clientRepo.load(clientId));
+        return new ModelAndView("redirect:/Client", "currClient", client);
     }
 
-    @RequestMapping(value = "/Client/Edit/{id}", method = GET)
-    public ModelAndView editClient(@PathVariable Integer id) {
+    @RequestMapping(value = "/Client/Update", method = POST)
+    public String clientEdit(Model model,
+                             @ModelAttribute("updClient") Client client) {
 
-        return new ModelAndView("clientEdit", "client", clientRepo.load(id));
+        Integer id = clientRepo.update(client).getId();
+        model.addAttribute("currClient", clientRepo.load(id));
+
+        return "redirect:/Client";
     }
 }
