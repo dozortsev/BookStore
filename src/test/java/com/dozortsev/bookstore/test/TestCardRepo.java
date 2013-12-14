@@ -13,7 +13,7 @@ public class TestCardRepo extends TestContext {
 
     @Test public void testSaveCard() throws Exception {
 
-        Integer idClient = 7, idBook = 3;
+        final Integer idClient = 7, idBook = 3;
 
         Card card = new Card();
         card.setBook(bookRepo.load(idBook));
@@ -32,30 +32,30 @@ public class TestCardRepo extends TestContext {
 
     @Test public void testLoadCard() throws Exception {
 
-        Integer idCard = 4;
+        final Integer idCard = 4;
 
         Card card = cardRepo.load(idCard);
         assertNotNull(card);
         assertNotNull(card.getBook());
         assertNotNull(card.getClient());
 
-        Book book = bookRepo.load(card.getBook().getId());
+        final Book book = bookRepo.load(card.getBook().getId());
         assertEquals(book, card.getBook());
 
-        Client client = clientRepo.load(card.getClient().getId());
+        final Client client = clientRepo.load(card.getClient().getId());
         assertEquals(client, card.getClient());
     }
 
     @Test public void testDeleteCard() throws Exception {
 
-        Integer idCard = 17, idClient;
+        final Integer idCard = 17;
 
         Card card = cardRepo.load(idCard);
         assertNotNull(card);
         assertNotNull(card.getBook());
         assertNotNull(card.getClient());
 
-        idClient = card.getClient().getId();
+        final Integer idClient = card.getClient().getId();
 
         cardRepo.delete(card);
 

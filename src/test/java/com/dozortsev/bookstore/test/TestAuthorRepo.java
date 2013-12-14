@@ -10,7 +10,7 @@ public class TestAuthorRepo extends TestContext {
 
     @Test public void testDeleteAuthor() throws Exception {
 
-        Integer id = 2;
+        final Integer id = 2;
 
         Author author = authorRepo.load(id);
         assertNotNull(author);

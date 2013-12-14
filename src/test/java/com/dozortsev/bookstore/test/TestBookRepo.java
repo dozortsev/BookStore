@@ -18,13 +18,13 @@ public class TestBookRepo extends TestContext {
 
     @Test public void testDeleteBook() throws Exception {
 
-        Integer idBook = 7, idAuthor;
+        final Integer idBook = 7;
 
         Book book = bookRepo.load(idBook);
         assertNotNull(book);
         assertNotNull(book.getAuthor());
 
-        idAuthor = book.getAuthor().getId();
+        final Integer idAuthor = book.getAuthor().getId();
 
         bookRepo.delete(book);
         assertNull(bookRepo.load(idBook));

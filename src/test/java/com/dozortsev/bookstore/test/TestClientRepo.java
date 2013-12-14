@@ -2,21 +2,28 @@ package com.dozortsev.bookstore.test;
 
 import com.dozortsev.bookstore.model.Card;
 import com.dozortsev.bookstore.model.Client;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static org.apache.log4j.Logger.getLogger;
 import static org.junit.Assert.*;
 
 public class TestClientRepo extends TestContext {
 
+    final String NAME = "Martin",
+                 SURNAME = "Fowler",
+                 PHONE = "0887543534",
+                 ADDRESS = "San Francisco, USA",
+                 PASSWORD = "7777Fowler",
+                 EMAIL = "fowler@gmail.com";
+
     @Test public void testSaveClient() throws Exception {
 
-        String name = "Martin", surname = "Fowler",
-                pwd = "7777mario", email = "fowler@gmail.com";
-
-        Client client = new Client(name, surname, email, pwd);
+        Client client = new Client(NAME, SURNAME, PHONE, ADDRESS, EMAIL, PASSWORD);
 
         Set<Card> cards = new LinkedHashSet<>();
         Card card1 = new Card(client, bookRepo.load(1), false);
@@ -33,10 +40,11 @@ public class TestClientRepo extends TestContext {
 
         client = clientRepo.load(client.getId());
 
-        assertEquals(name, client.getName());
-        assertEquals(surname, client.getSurname());
-        assertEquals(email, client.getEmail());
-        assertEquals(pwd, client.getPassword());
+        assertEquals(NAME, client.getName());
+        assertEquals(SURNAME, client.getSurname());
+        assertEquals(PHONE, client.getPhone());
+        assertEquals(EMAIL, client.getEmail());
+        assertEquals(PASSWORD, client.getPassword());
 
         assertTrue(client.getCards().contains(card1));
         assertTrue(client.getCards().contains(card2));
@@ -44,7 +52,7 @@ public class TestClientRepo extends TestContext {
 
     @Test public void testDeleteClient() throws Exception {
 
-        Integer id = 1;
+        final Integer id = 1;
 
         clientRepo.delete(clientRepo.load(id));
 
@@ -56,7 +64,7 @@ public class TestClientRepo extends TestContext {
 
     @Test public void testUpdateClient() throws Exception {
 
-        Integer idClient = 2, idBook = 8;
+        final Integer idClient = 2, idBook = 8;
 
         Client client = clientRepo.load(idClient);
         assertNotNull(client);
@@ -64,8 +72,7 @@ public class TestClientRepo extends TestContext {
         Card card = new Card(client, bookRepo.load(idBook), true);
         client.getCards().add(card);
 
-        client = clientRepo.update(client);
-        assertTrue(client.getCards().contains(card));
+        clientRepo.update(client);
 
         client = clientRepo.load(idClient);
         assertTrue(client.getCards().contains(card));
@@ -73,7 +80,7 @@ public class TestClientRepo extends TestContext {
 
     @Test public void testLoadAllCards() throws Exception {
 
-        Integer id = 3;
+        final Integer id = 3;
 
         Client client = clientRepo.load(id);
 
@@ -85,7 +92,7 @@ public class TestClientRepo extends TestContext {
 
         for (Client client : clientRepo.loadAll()) {
 
-            String email = client.getEmail(), pwd = client.getPassword();
+            final String email = client.getEmail(), pwd = client.getPassword();
 
             Client expectedClient = clientRepo.authentication(email, pwd);
 
