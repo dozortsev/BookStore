@@ -102,28 +102,28 @@ VALUES
   );
 
 
-INSERT INTO Client (Password, Email, Name, Surname)
+INSERT INTO Client (Password, Email, Name, Surname, Phone, Address)
 VALUES
-  (64999, 'Kylie_Jacobs@jazlyn.biz', 'Marietta', 'Shields'),
-(50388, 'Gonzalo_Brown@devin.io', 'Emilio', 'Kovacek'),
-(14346, 'Berneice.Kozey@lucienne.tv', 'Earline', 'Lubowitz'),
-(00258, 'Jeramy@santina.io', 'Kayla', 'Ondricka'),
-(08559, 'Roslyn_Runte@kaya.info', 'Elva', 'Keebler'),
-(84058, 'Giovanna.Weissnat@lillian.tv', 'Matt', 'Kilback'),
-(49731, 'Demond@perry.org', 'Ken', 'Schulist'),
-(37674, 'Deondre_Ortiz@isai.io', 'Lacey', 'West'),
-(52079, 'Khalil.Rau@edyth.net', 'Lane', 'Hoppe'),
-(14367, 'Destiny@jeremie.com', 'Ole', 'Wuckert'),
-(82060, 'Bonnie.Steuber@brandi.us', 'Camila', 'Jakubowski'),
-  (47514, 'Rodrick.Schuster@nova.name', 'Eugene', 'Braun'),
-  (08786, 'Dawson@florencio.name', 'Adrienne', 'Gutkowski'),
-  (64908, 'Carson@ambrose.name', 'Davion', 'Durgan'),
-  (14617, 'Kenya@van.net', 'Fernando', 'Herzog'),
-  (47992, 'Maudie_Adams@oswaldo.tv', 'Laury', 'Steuber'),
-  (38858, 'Katlynn.Kutch@yolanda.info', 'Zaria', 'Beatty'),
-  (37882, 'Annetta@nellie.co.uk', 'Emmy', 'Price'),
-  (44038, 'Kasandra@delpha.org', 'Sally', 'Krajcik'),
-  (04308, 'Bailee@isabell.io', 'Conner', 'Ritchie');
+  (64999, 'Kylie_Jacobs@jazlyn.biz', 'Marietta', 'Shields', '094580843','Puerto Rico, Medahaven'),
+(50388, 'Gonzalo_Brown@devin.io', 'Emilio', 'Kovacek', '096731178','Sao Tome and Príncipe, Dejonfurt'),
+(14346, 'Berneice.Kozey@lucienne.tv', 'Earline', 'Lubowitz', '096751315','Taiwan, Laurettaport'),
+(00258, 'Jeramy@santina.io', 'Kayla', 'Ondricka', '096756665','Belize, Bruenburgh'),
+(08559, 'Roslyn_Runte@kaya.info', 'Elva', 'Keebler', '0887513115','Puerto Rico, Harbertown'),
+(84058, 'Giovanna.Weissnat@lillian.tv', 'Matt', 'Kilback', '050053144','Switzerland, New Selmer'),
+(49731, 'Demond@perry.org', 'Ken', 'Schulist', '0500531955','Puerto Rico, Harbertown'),
+(37674, 'Deondre_Ortiz@isai.io', 'Lacey', 'West', '50041944','Aruba, South Vladimir'),
+(52079, 'Khalil.Rau@edyth.net', 'Lane', 'Hoppe','093540760','Switzerland, New Selmer'),
+(14367, 'Destiny@jeremie.com', 'Ole', 'Wuckert', '092354010','Puerto Rico, Harbertown'),
+(82060, 'Bonnie.Steuber@brandi.us', 'Camila', 'Jakubowski', '092354084','Puerto Rico, Harbertown'),
+  (47514, 'Rodrick.Schuster@nova.name', 'Eugene', 'Braun', '092420610','Aruba, South Vladimir'),
+  (08786, 'Dawson@florencio.name', 'Adrienne', 'Gutkowski', '92420699','Midway Islands, Keelington'),
+  (64908, 'Carson@ambrose.name', 'Davion', 'Durgan', '092420100','British Virgin Islands, South Ethelynville'),
+  (14617, 'Kenya@van.net', 'Fernando', 'Herzog', '066611110','Switzerland, New Selmer'),
+  (47992, 'Maudie_Adams@oswaldo.tv', 'Laury', 'Steuber', '06663866','Venezuela, Jacobsfort'),
+  (38858, 'Katlynn.Kutch@yolanda.info', 'Zaria', 'Beatty', '066638610','Qatar, Annemouth'),
+  (37882, 'Annetta@nellie.co.uk', 'Emmy', 'Price', '066638681','Anguilla, East Alfonso'),
+  (44038, 'Kasandra@delpha.org', 'Sally', 'Krajcik', '99420610','Kiribati, Geoffreymouth'),
+  (04308, 'Bailee@isabell.io', 'Conner', 'Ritchie', '050420610','Belize, Bruenburgh');
 
 
 INSERT INTO Card (IdClient, IdBook, Status)
