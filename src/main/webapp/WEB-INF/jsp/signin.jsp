@@ -1,22 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ include file="resources.jsp" %>
+<%@ include file="templates/resources.jsp" %>
 
 <html>
 <head>
     <meta charset="utf-8">
 
-    <link href="img/icon.png" rel="icon" type="image/png">
     <title>Sign In</title>
 
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/signin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <div class="container">
 
-    <form:form cssClass="form-signin" action="${contextPath}/Welcome" method="POST">
+    <form:form cssClass="form-signin" action="${path}/Welcome" method="POST">
 
         <h2 class="form-signin-heading">Please sign in</h2>
 
@@ -25,7 +23,7 @@
 
         <input type="submit" class="btn btn-lg btn-success btn-block" value="Sing In">
 
-        <a href="${contextPath}/SignUp" class="btn btn-lg btn-primary btn-block" type="submit">
+        <a href="${path}/SignUp" class="btn btn-lg btn-primary btn-block" type="submit">
             Sign Up for BookStore
         </a>
 

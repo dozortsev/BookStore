@@ -1,21 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ include file="resources.jsp" %>
+<%@ include file="templates/resources.jsp" %>
 
 <html>
 <head>
-    <link href="img/icon.png" rel="icon" type="image/png">
-
     <title>Sign Up</title>
 
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/signin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <div class="container">
 
-    <form:form cssClass="form-signin" action="${contextPath}/Welcome" method="POST">
+    <form:form cssClass="form-signin" action="${path}/Welcome" method="POST">
 
         <h2 class="form-signin-heading">Create account</h2>
 

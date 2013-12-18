@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ include file="resources.jsp" %>
+<%@ include file="templates/resources.jsp" %>
 
 <html>
 <head>

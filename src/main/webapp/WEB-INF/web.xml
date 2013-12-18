@@ -58,14 +58,6 @@
 
     <!-- JSP & Servlet declarations -->
 
-    <servlet>
-        <servlet-name>Authentication</servlet-name>
-        <jsp-file>/WEB-INF/jsp/signin.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Authentication</servlet-name>
-        <url-pattern>/Authentication</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>SignUp</servlet-name>
@@ -74,6 +66,42 @@
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignIn</servlet-name>
+        <jsp-file>/WEB-INF/jsp/signin.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignIn</servlet-name>
+        <url-pattern>/SignIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Client</servlet-name>
+        <jsp-file>/WEB-INF/jsp/client.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Client</servlet-name>
+        <url-pattern>/Client</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Showcase</servlet-name>
+        <jsp-file>/WEB-INF/jsp/showcase.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Showcase</servlet-name>
+        <url-pattern>/Showcase</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Form</servlet-name>
+        <jsp-file>/WEB-INF/jsp/templates/form.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Form</servlet-name>
+        <url-pattern>/Form</url-pattern>
     </servlet-mapping>
 
 </web-app>
