@@ -12,7 +12,6 @@ import static org.apache.log4j.Logger.getLogger;
 import static org.hibernate.criterion.Restrictions.like;
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
-
 @Transactional(rollbackFor = Exception.class, propagation = REQUIRES_NEW)
 @Repository
 public class ClientRepoImpl extends BaseRepoImpl<Integer, Client> implements ClientRepo {
@@ -28,19 +27,19 @@ public class ClientRepoImpl extends BaseRepoImpl<Integer, Client> implements Cli
     public Client authentication(String email, String pwd) {
         Client client = null;
         try {
-            log.info(format("Authentication client. Email: '%s'; Password: '%s'.", email, pwd));
+            log.info(format("Authentication client. Email: '%s'", email));
 
             Criteria crit = getSession().createCriteria(getEntityClass());
 
             client = (Client) crit.add(like("email", email))
-                    .add(like("password", pwd))
-                    .uniqueResult();
+                                  .add(like("password", pwd))
+                                  .uniqueResult();
 
             if (client == null) {
-                log.info("Client not found.");
+                log.info("Client not found");
                 return null;
             }
-            log.info("Successful founded.");
+            log.info(format("Successful founded. Id: %s", client.getId()));
 
         } catch (HibernateException e) {
             log.error("Error:", e);

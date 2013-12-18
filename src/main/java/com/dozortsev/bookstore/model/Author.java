@@ -1,7 +1,9 @@
 package com.dozortsev.bookstore.model;
 
-import javax.persistence.*;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 import java.util.Calendar;
 
 import static javax.persistence.TemporalType.DATE;

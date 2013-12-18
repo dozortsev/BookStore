@@ -30,6 +30,8 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
 
     private static final Logger log = getLogger(BaseRepoImpl.class);
 
+    /* todo: logs messages refactoring */
+
     @Autowired
     public void setFactory(SessionFactory factory) {
         this.factory = factory;
@@ -42,9 +44,9 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     @Override
     public ID save(T t) {
         try {
-            log.info(format("Saving new %s.", getEntityName()));
+            log.info(format("Saving new %s", getEntityName()));
             getSession().save(t);
-            log.info("Successful saved.");
+            log.info(format("Successful saved. Id: %s", t.getId()));
 
         } catch (HibernateException e) {
             log.error("Error:", e);
@@ -56,9 +58,9 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     @Override
     public T load(ID id) {
         try {
-            log.info(format("Loading %s by Id: %s.", getEntityName(), id));
+            log.info(format("Loading %s by Id: %s", getEntityName(), id));
             t = (T) getSession().get(getEntityClass(), id);
-            log.info("Successful loaded.");
+            log.info("Successful loaded");
 
         } catch (HibernateException e) {
             log.error("Error:", e);
@@ -69,9 +71,9 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     @Override
     public void delete(T t) {
         try {
-            log.info(format("Deleting %s.", getEntityName()));
+            log.info(format("Deleting %s. Id: %s", getEntityName(), t.getId()));
             getSession().delete(t);
-            log.info("Successful deleted.");
+            log.info("Successful deleted");
 
         } catch (HibernateException e) {
             log.error("Error:", e);
@@ -81,16 +83,16 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     @Override
     public void deleteById(ID id) {
         try {
-            log.info(format("Deleting %s by Id: %s.", getEntityName(), id));
+            log.info(format("Deleting %s by Id: %s", getEntityName(), id));
             t = (T) getSession().get(getEntityClass(), id);
 
             if (t != null) {
-                log.info(format("%s successful loaded.", getEntityName()));
+                log.info(format("%s successful loaded", getEntityName()));
                 getSession().delete(t);
-                log.info("Successful deleted.");
+                log.info("Successful deleted");
                 return;
             }
-            log.info(format("%s not loaded.", getEntityName()));
+            log.info(format("%s not loaded", getEntityName()));
 
         } catch (HibernateException e) {
             log.error("Error:", e);
@@ -100,9 +102,9 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     @Override
     public T update(T t) {
         try {
-            log.info(format("Updating %s.", getEntityName()));
+            log.info(format("Updating %s. Id: %s", getEntityName(), t.getId()));
             getSession().update(t);
-            log.info("Successful updated.");
+            log.info("Successful updated");
 
         } catch (HibernateException e) {
             log.error("Error:", e);

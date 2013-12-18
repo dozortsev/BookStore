@@ -1,7 +1,6 @@
 package com.dozortsev.bookstore.model;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
 
 import static javax.persistence.FetchType.EAGER;

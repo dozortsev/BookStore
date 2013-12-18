@@ -21,19 +21,6 @@ public class Util {
         return String.valueOf(rand.nextInt(1_000_000));
     }
 
-    public static boolean isClientValid(Client client) {
-
-        if (client.getId() == null &&
-                client.getName() != null &&
-                client.getEmail() != null &&
-                client.getPassword() != null &&
-                client.getSurname() != null) {
-
-            return true;
-        }
-        return false;
-    }
-
     public static Set removeAll(Set<Book> books, Client client) {
 
         for (Card card : client.getCards())

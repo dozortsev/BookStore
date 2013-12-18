@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-
 import static com.dozortsev.bookstore.util.Util.removeAll;
 import static org.apache.log4j.Logger.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
