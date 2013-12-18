@@ -2,36 +2,29 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<html>
-<head>
-    <link href="img/icon.png" rel="icon" type="image/png">
+<title>Book Store</title>
 
-    <title>Book Store</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="css/justified-nav.css" rel="stylesheet" type="text/css">
-</head>
-<body>
+<link href="css/justified-nav.css" rel="stylesheet" type="text/css">
 
 <div class="container">
 
-    <a href="${contextPath}/Client/${client.id}">${client.name} ${client.surname}</a> |
-    <a href="${contextPath}/Authentication">Log Out</a>
+    <a href="${path}/Client">${client.name} ${client.surname}</a> |
+    <a href="${path}/SignIn">Log Out</a>
 
     <div class="jumbotron">
         <h1>
-            Welcome in Book Store.
+            ${quote}
         </h1>
+        <a href="#Books" class="glyphicon glyphicon-circle-arrow-down"></a>
     </div>
 
-    <div class="row">
-
+    <div id="Books" class="row">
+        <br/>
         <c:forEach items="${books}" var="book">
 
             <c:set var="author" value="${book.author}"/>
 
-            <c:set var="pdate" value="${book.pubDate}"/>
+            <c:set var="bookAction" value="${path}/Client/Book/${book.id}/Status/"/>
 
             <div class="col-lg-6">
 
@@ -57,7 +50,7 @@
                             <td>${book.genre}</td>
                             <td>${book.language}</td>
                             <td>
-                                    ${pdate.get(1)}-${pdate.get(2)}-${pdate.get(5)}
+                                <fmt:formatDate value="${book.pubDate}"/>
                             </td>
                             <td>${book.pages}</td>
                         </tr>
@@ -65,22 +58,22 @@
                     </table>
 
                     <div class="panel-body">
-                        <i>${book.description}</i>
+                        <i>${fn:substring(book.description, 0, 400)}&hellip;</i>
                     </div>
 
                     <div class="panel-footer">
 
-                        <c:set var="buyBook" value="./Welcome?idBook=${book.id}&idClient=${client.id}&status="/>
-
-                        <a href="${buyBook}true" class="btn btn-success" role="button">Buy ${book.price}$</a>
-                        <a href="${buyBook}false" class="btn btn-default" role="button">Add</a>
+                        <a href="${bookAction}true" class="btn btn-primary">
+                            Buy <fmt:formatNumber value="${book.price}" type="currency"/>
+                        </a>
+                        <a href="${bookAction}false" class="btn btn-default">Add</a>
                     </div>
                 </div>
             </div>
         </c:forEach>
     </div>
 
+    <%-- todo: add footer.jsp --%>
+
     <div class="footer"><p>Dozortsev Anton</p></div>
 </div>
-</body>
-</html>

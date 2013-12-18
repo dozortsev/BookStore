@@ -2,75 +2,63 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<html>
-<head>
-    <link href="img/icon.png" rel="icon" type="image/png">
-
-    <title>Client / ${client.name} ${client.surname}</title>
-
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="css/signin.css" rel="stylesheet" type="text/css">
-
-</head>
-<body>
-
-<%-- todo: log out system --%>
+<title>Client / ${client.name} ${client.surname}</title>
 
 <div class="container">
 
-    <a href="${contextPath}/Client/Edit/${client.id}">Edit ${client.name} ${client.surname}</a> |
-    <a href="${contextPath}/Authentication">Log Out</a>
+    <a href="${path}/toShowcase">Showcase</a>
+    <a href="${path}/Edit">Edit</a>
+    <a href="${path}/SignIn">Log Out</a>
 
-    <form:form action="${contextPath}/Welcome" method="POST" commandName="client">
+    Name: ${client.name}
+    <br/>
+    Surname: ${client.surname}
+    <br/>
+    Email: ${client.email}
 
-        <form:hidden path="id"/>
-
-        <br/><br/>
-        Name: ${client.name}
-        <br/>
-        Surname: ${client.surname}
-        <br/>
-        Email: ${client.email}
-
+    <c:if test="${ not empty client.cards}">
         <br/><br/>
         <table border="1">
             <tr>
-                <td>Id</td>
-                <td>Name</td>
-                <td>Author</td>
+                <td>
+                    <span class="glyphicon glyphicon-book"></span>${fn:length(client.cards)}
+                </td>
+                <td>Book</td>
                 <td>Status</td>
             </tr>
             <c:forEach items="${client.cards}" var="card">
 
                 <c:set value="${card.book}" var="book"/>
                 <c:set value="${book.author}" var="author"/>
+
+                <c:set value="${path}/Client/Card/${card.id}/Status/" var="cardAction"/>
                 <tr>
-                    <td>${book.id}</td>
-                    <td>${book.name}</td>
-                    <td>${author.name} ${author.surname}</td>
-
-                    <c:set value="${contextPath}/Client/${client.id}/Card/${card.id}?status=" var="clientBook"/>
-
+                    <td>
+                        <a href="${cardAction}false">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </a>
+                    </td>
+                    <td>${book.name}<br/>
+                        <b>
+                            <small>${author.name}&ensp;${author.surname}</small>
+                        </b>
+                    </td>
                     <c:choose>
                         <c:when test="${card.status}">
                             <td>
-                                <a href="${clientBook}false">Delete</a>
+                                Purchased !
                             </td>
                         </c:when><c:otherwise>
-                        <td>
-                            <a href="${clientBook}true">Buy ${book.price}$</a> |
-                            <a href="${clientBook}false">Delete</a>
+
+                        <td class="active">
+                            <a href="${cardAction}true">
+                                Buy <fmt:formatNumber value="${book.price}" type="currency"/>
+                            </a>
                         </td>
                     </c:otherwise>
                     </c:choose>
                 </tr>
             </c:forEach>
         </table>
-
-        <input type="submit" role="button" value="Showcase">
-
-    </form:form>
+    </c:if>
 </div>
-
-</body>
-</html>

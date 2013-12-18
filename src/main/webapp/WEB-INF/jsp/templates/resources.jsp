@@ -17,7 +17,11 @@
 
 <c:set value="You bought book Thank you" var="thxForBook"/>
 
+<c:set value="You never alone when you read a book" var="quote" />
+
 <c:set value="Your account successfully updated" var="updateClient" />
+
+<c:set value="Welcome on Book Store. Now please sign in." var="welcome" />
 
 
 <%-- JS --%>
@@ -26,6 +30,8 @@
 
 
 <!-- CSS -->
+
+<%-- todo: add Glyphicons in view --%>
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
 

@@ -12,16 +12,18 @@
 
 <div class="container">
 
-    <form:form cssClass="form-signin" action="${path}/Welcome" method="POST">
+    <form:form cssClass="form-signin" action="${path}/Client/Save" method="POST" modelAttribute="newClient">
 
         <h2 class="form-signin-heading">Create account</h2>
 
-        <input type="text" name="name" class="form-control" placeholder="Name" maxlength=100 required autofocus>
-        <input type="text" name="surname" class="form-control" placeholder="Surname" maxlength=100 required>
-        <input type="text" name="email" class="form-control" placeholder="Email" maxlength=200 required>
-        <input type="password" name="password" class="form-control" placeholder="Password" maxlength=15 required>
+        <jsp:include page="Form" />
 
-        <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign Up">
+        <input type="submit" class="btn btn-lg btn-success btn-block" onclick="alertBookstore('${welcome}');"
+               value="Sign Up"/>
+
+        <a href="${path}/SignIn" class="btn btn-lg btn-primary btn-block">
+            I have account
+        </a>
     </form:form>
 </div>
 

@@ -88,11 +88,20 @@
 
     <servlet>
         <servlet-name>Showcase</servlet-name>
-        <jsp-file>/WEB-INF/jsp/showcase.jsp</jsp-file>
+        <jsp-file>/WEB-INF/jsp/bookstore.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Showcase</servlet-name>
         <url-pattern>/Showcase</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Edit</servlet-name>
+        <jsp-file>/WEB-INF/jsp/edit.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Edit</servlet-name>
+        <url-pattern>/Edit</url-pattern>
     </servlet-mapping>
 
     <servlet>
