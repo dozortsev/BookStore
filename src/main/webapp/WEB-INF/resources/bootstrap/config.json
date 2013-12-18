@@ -1,0 +1,21 @@
+{
+  "vars": {},
+  "css": [
+    "type.less",
+    "grid.less",
+    "tables.less",
+    "forms.less",
+    "buttons.less",
+    "glyphicons.less",
+    "input-groups.less",
+    "navs.less",
+    "labels.less",
+    "badges.less",
+    "jumbotron.less",
+    "list-group.less",
+    "close.less",
+    "utilities.less",
+    "responsive-utilities.less"
+  ],
+  "js": []
+}
