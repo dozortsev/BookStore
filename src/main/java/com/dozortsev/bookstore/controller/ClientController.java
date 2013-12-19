@@ -20,7 +20,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-@SessionAttributes({"client"})
+@SessionAttributes("client")
 public class ClientController {
 
     @Autowired
@@ -31,8 +31,6 @@ public class ClientController {
     BookRepo bookRepo;
 
     private final static Logger log = getLogger(ClientController.class);
-
-    /* todo: make feature with ModelAttribute all books; using are bookmarks line */
 
     @RequestMapping(value = "/toShowcase", method = GET)
     public ModelAndView backToShowcase(@ModelAttribute Client client) {
