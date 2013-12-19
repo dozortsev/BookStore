@@ -15,13 +15,12 @@
         <jsp:include page="Form"/>
         <br/>
         <button class="btn btn-lg btn-success btn-block" onclick="alertBookstore('${updateClient}')" type="submit">
-            <span class="glyphicon glyphicon-saved"></span>&ensp;Save
+            Save
         </button>
 
-        <a href="${path}/Client" class="btn btn-lg btn-warning btn-block">
-            <span class="glyphicon glyphicon-ban-circle"></span>&ensp;Cancel
+        <a href="${path}/Client" class="btn btn-lg btn-primary btn-block">
+            Cancel
         </a>
-
     </form:form>
 </div>
 

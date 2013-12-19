@@ -13,7 +13,7 @@
 
 <c:set value="${pageContext.request.contextPath}" var="path"/>
 
-<c:set value="Book Store" var="projectName" />
+<c:set value="BookStore" var="projectName" />
 
 <c:set value="You bought book Thank you" var="thxForBook"/>
 

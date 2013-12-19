@@ -11,8 +11,6 @@
 
     <name>Book Store</name>
 
-    <!-- todo: Change README.md file -->
-
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

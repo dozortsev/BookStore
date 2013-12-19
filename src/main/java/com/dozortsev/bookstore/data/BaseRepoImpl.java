@@ -30,8 +30,6 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
 
     private static final Logger log = getLogger(BaseRepoImpl.class);
 
-    /* todo: logs messages refactoring */
-
     @Autowired
     public void setFactory(SessionFactory factory) {
         this.factory = factory;

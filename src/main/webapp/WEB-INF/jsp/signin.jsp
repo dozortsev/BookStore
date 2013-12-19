@@ -2,16 +2,12 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<html>
-<head>
-    <title>Sign In</title>
+<title>Sign In</title>
 
-    <link href="css/signin.css" rel="stylesheet" type="text/css">
-</head>
-<body>
+<link href="css/signin.css" rel="stylesheet" type="text/css">
 
-<c:remove var="client" scope="session" />
-<c:remove var="books" scope="session" />
+<c:remove var="client" scope="session"/>
+<c:remove var="books" scope="session"/>
 
 <div class="container">
 
@@ -25,10 +21,7 @@
         <input type="submit" class="btn btn-lg btn-success btn-block" value="Sing In">
 
         <a href="${path}/SignUp" class="btn btn-lg btn-primary btn-block">
-            Sign Up for BookStore
+            Sign Up for ${projectName}
         </a>
-
     </form:form>
 </div>
-</body>
-</html>

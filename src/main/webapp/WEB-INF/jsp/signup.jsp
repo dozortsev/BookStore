@@ -2,13 +2,9 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<html>
-<head>
-    <title>Sign Up</title>
+<title>Sign Up</title>
 
-    <link href="css/signin.css" rel="stylesheet" type="text/css">
-</head>
-<body>
+<link href="css/signin.css" rel="stylesheet" type="text/css">
 
 <div class="container">
 
@@ -16,8 +12,9 @@
 
         <h2 class="form-signin-heading">Create account</h2>
 
-        <jsp:include page="Form" />
+        <jsp:include page="Form"/>
 
+        <br/>
         <input type="submit" class="btn btn-lg btn-success btn-block" onclick="alertBookstore('${welcome}');"
                value="Sign Up"/>
 
@@ -26,6 +23,3 @@
         </a>
     </form:form>
 </div>
-
-</body>
-</html>
