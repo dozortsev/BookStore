@@ -13,16 +13,6 @@
 
 <c:set value="${pageContext.request.contextPath}" var="path"/>
 
-<c:set value="BookStore" var="projectName" />
-
-<c:set value="You bought book Thank you" var="thxForBook"/>
-
-<c:set value="You never alone when you read a book" var="quote" />
-
-<c:set value="Your account successfully updated" var="updateClient" />
-
-<c:set value="Welcome on Book Store. Now please sign in." var="welcome" />
-
 
 <%-- JS --%>
 

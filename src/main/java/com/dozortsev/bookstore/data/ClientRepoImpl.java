@@ -23,8 +23,7 @@ public class ClientRepoImpl extends BaseRepoImpl<Integer, Client> implements Cli
     }
 
     @Transactional(readOnly = true)
-    @Override
-    public Client authentication(String email, String pwd) {
+    @Override public Client authentication(String email, String pwd) {
         Client client = null;
         try {
             log.info(format("Authentication client. Email: '%s'", email));

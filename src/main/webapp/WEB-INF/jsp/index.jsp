@@ -2,7 +2,7 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<title>${projectName}</title>
+<title><fmt:message key="project.name"/></title>
 
 <link rel="stylesheet" href="css/jumbotron.css">
 <link rel="stylesheet" href="css/justified-nav.css">
@@ -12,24 +12,25 @@
         <ul class="nav nav-pills pull-right">
             <li class="active">
                 <a href="${path}/Client">
-                    <span class="glyphicon glyphicon-user"></span>&ensp;
-                    ${client.name} ${client.surname}
+                    <span class="glyphicon glyphicon-user"></span>
+                    &ensp;${client.name} ${client.surname}
                 </a>
             </li>
             <li>
                 <a href="${path}/SignIn">
-                    <span class="glyphicon glyphicon-off"></span>&ensp;Log Out
+                    <span class="glyphicon glyphicon-off"></span>
+                    &ensp;<fmt:message key="btn.logout"/>
                 </a>
             </li>
         </ul>
-        <h3 class="text-muted">${projectName}</h3>
+        <h3 class="text-muted"><fmt:message key="project.name"/></h3>
     </div>
 </div>
 
 <div class="jumbotron img-background">
     <div class="container">
         <h1>
-            ${quote}
+            <fmt:message key="index.quote"/>
         </h1>
 
         <p><a href="#Books">
@@ -58,30 +59,33 @@
                     </a>
                     <a class="list-group-item">
                         <span class="badge">${author.name} ${author.surname}</span>
-                        <b>Author</b>
+                        <b><fmt:message key="index.lbl.author"/></b>
                     </a>
                     <a class="list-group-item">
                         <span class="badge">${book.genre}</span>
-                        Genre
+                        <fmt:message key="index.lbl.genre"/>
                     </a>
                     <a class="list-group-item">
                         <span class="badge">${book.language}</span>
-                        Language
+                        <fmt:message key="index.lbl.lang"/>
                     </a>
                     <a class="list-group-item">
                         <span class="badge"><fmt:formatDate value="${book.pubDate}"/></span>
-                        Public date
+                        <fmt:message key="index.lbl.pdate"/>
                     </a>
                     <a class="list-group-item">
                         <span class="badge">${book.pages}</span>
-                        Pages
+                        <fmt:message key="index.lbl.pages"/>
                     </a>
                 </div>
-                </p>
+                <p>
                     <a href="${bookAction}true" class="btn btn-primary">
-                        Buy <fmt:formatNumber value="${book.price}" type="currency"/>
+                        <fmt:message key="btn.buy"/>&ensp;
+                        <fmt:formatNumber value="${book.price}" type="currency"/>
                     </a>
-                    <a href="${bookAction}false" class="btn btn-default">Add</a>
+                    <a href="${bookAction}false" class="btn btn-default">
+                        <fmt:message key="btn.add"/>
+                    </a>
                 </p><br/><br/>
             </div>
         </c:forEach>

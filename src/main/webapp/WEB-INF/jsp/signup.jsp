@@ -2,7 +2,7 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<title>Sign Up</title>
+<title><fmt:message key="signup.tit"/></title>
 
 <link href="css/signin.css" rel="stylesheet" type="text/css">
 
@@ -10,16 +10,17 @@
 
     <form:form cssClass="form-signin" action="${path}/Client/Save" method="POST" modelAttribute="newClient">
 
-        <h2 class="form-signin-heading">Create account</h2>
+        <h2 class="form-signin-heading"><fmt:message key="signup.header"/></h2>
 
         <jsp:include page="Form"/>
 
         <br/>
-        <input type="submit" class="btn btn-lg btn-success btn-block" onclick="alertBookstore('${welcome}');"
-               value="Sign Up"/>
+        <button type="submit" class="btn btn-lg btn-success btn-block" onclick="alertBookstore('<fmt:message key="signup.msg.alert"/>');">
+            <fmt:message key="btn.signup"/>
+        </button>
 
         <a href="${path}/SignIn" class="btn btn-lg btn-primary btn-block">
-            I have account
+            <fmt:message key="signup.btn.signin"/>
         </a>
     </form:form>
 </div>

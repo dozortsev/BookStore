@@ -2,24 +2,24 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<title>Edit Account</title>
+<title><fmt:message key="edit.tit"/></title>
 
-<link href="css/signin.css" rel="stylesheet" type="text/css">
+<link href="css/signin.css" rel="stylesheet">
 
 <div class="container">
 
     <form:form cssClass="form-signin" action="${path}/Client/Update" method="POST" modelAttribute="update">
 
-        <h2 class="form-signin-heading">Edit account</h2>
+        <h2 class="form-signin-heading"><fmt:message key="edit.tit"/></h2>
 
         <jsp:include page="Form"/>
         <br/>
-        <button class="btn btn-lg btn-success btn-block" onclick="alertBookstore('${updateClient}')" type="submit">
-            Save
+        <button class="btn btn-lg btn-success btn-block" onclick="alertBookstore('<fmt:message key="edit.msg.alert"/>')" type="submit">
+            <fmt:message key="btn.save"/>
         </button>
 
         <a href="${path}/Client" class="btn btn-lg btn-primary btn-block">
-            Cancel
+            <fmt:message key="btn.cancel"/>
         </a>
     </form:form>
 </div>

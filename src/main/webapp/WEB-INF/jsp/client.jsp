@@ -2,7 +2,10 @@
 
 <%@ include file="templates/resources.jsp" %>
 
-<title>Client / ${client.name} ${client.surname}</title>
+<title>
+    <fmt:message key="client.tit"/>
+    ${client.name}&ensp;${client.surname}
+</title>
 
 <link rel="stylesheet" href="css/jumbotron-narrow.css"/>
 
@@ -13,21 +16,24 @@
         <ul class="nav nav-pills pull-right">
             <li class="active">
                 <a href="${path}/toShowcase">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>&ensp;Showcase
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    &ensp;<fmt:message key="btn.showcase"/>
                 </a>
             </li>
             <li>
                 <a href="${path}/Edit">
-                    <span class="glyphicon glyphicon-pencil"></span>&ensp;Edit
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    &ensp;<fmt:message key="btn.edit"/>
                 </a>
             </li>
             <li>
                 <a href="${path}/SignIn">
-                    <span class="glyphicon glyphicon-off"></span>&ensp;Log Out
+                    <span class="glyphicon glyphicon-off"></span>
+                    &ensp;<fmt:message key="btn.logout"/>
                 </a>
             </li>
         </ul>
-        <h3 class="text-muted">${projectName}</h3>
+        <h3 class="text-muted"><fmt:message key="project.name"/></h3>
     </div>
 
     <div class="jumbotron">
@@ -39,23 +45,28 @@
 
             <div class="col-lg-8">
                 <h3>
-                    Name:&ensp;<span class="label label-default">${client.name}</span>
+                    <fmt:message key="client.lbl.name"/>
+                    &ensp;<span class="label label-default">${client.name}</span>
                 </h3>
                 <h3>
-                    Surname:&ensp;<span class="label label-default">${client.surname}</span>
+                    <fmt:message key="client.lbl.surname"/>
+                    &ensp;<span class="label label-default">${client.surname}</span>
                 </h3>
                 <h3>
                     <c:if test="${ not empty client.address}">
-                        Address:&ensp;<span class="label label-default">${client.address}</span>
+                        <fmt:message key="client.lbl.address"/>
+                        &ensp;<span class="label label-default">${client.address}</span>
                     </c:if>
                 </h3>
                 <h3>
                     <c:if test="${ not empty client.phone}">
-                        Phone:&ensp;<span class="label label-default">${client.phone}</span>
+                        <fmt:message key="client.lbl.phone"/>
+                        &ensp;<span class="label label-default">${client.phone}</span>
                     </c:if>
                 </h3>
                 <h3>
-                    Email:&ensp;<span class="label label-default">${client.email}</span>
+                    <fmt:message key="client.lbl.email"/>
+                    &ensp;<span class="label label-default">${client.email}</span>
                 </h3>
             </div>
         </div>
@@ -72,11 +83,11 @@
                     <thead>
                     <tr>
                         <th>
-                            <span class="glyphicon glyphicon-book"></span>&ensp;
-                                ${fn:length(client.cards)}
+                            <span class="glyphicon glyphicon-book"></span>
+                            &ensp;${fn:length(client.cards)}
                         </th>
-                        <th>Book</th>
-                        <th>Status</th>
+                        <th><fmt:message key="client.tbl.book"/></th>
+                        <th><fmt:message key="client.tbl.status"/></th>
                     </tr>
                     </thead>
                     <c:forEach items="${client.cards}" var="card">
@@ -101,12 +112,15 @@
                             <c:choose>
                                 <c:when test="${card.status}">
                                     <td>
-                                        <span class="glyphicon glyphicon-star"></span>&ensp;Purchased
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        &ensp;<fmt:message key="client.tbl.status.pcd"/>
                                     </td>
                                 </c:when><c:otherwise>
                                 <td class="active success">
                                     <a href="${cardAction}true">
-                                        Buy&ensp;<fmt:formatNumber value="${book.price}" type="currency"/>
+
+                                        <fmt:message key="btn.buy"/>&ensp;
+                                        <fmt:formatNumber value="${book.price}" type="currency"/>
                                     </a>
                                 </td>
                             </c:otherwise>

@@ -10,5 +10,5 @@
         </li>
     </ul>
 
-    <h4>&copy; ${projectName} / 2013</h4>
+    <h4>&copy;&ensp;<fmt:message key="project.name"/>&ensp;/&ensp;2013</h4>
 </div>
