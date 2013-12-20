@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Card extends AbstractEntity<Integer> {
 
     @Embedded
-    private CardId idCard = new CardId();
+    private final CardId idCard = new CardId();
 
     @Column(name = "Status", nullable = false)
     private Boolean status;

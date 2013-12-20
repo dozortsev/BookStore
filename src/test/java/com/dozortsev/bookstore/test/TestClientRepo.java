@@ -2,26 +2,24 @@ package com.dozortsev.bookstore.test;
 
 import com.dozortsev.bookstore.model.Card;
 import com.dozortsev.bookstore.model.Client;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static org.apache.log4j.Logger.getLogger;
 import static org.junit.Assert.*;
 
 public class TestClientRepo extends TestContext {
 
     final String NAME = "Martin",
-                 SURNAME = "Fowler",
-                 PHONE = "0887543534",
-                 ADDRESS = "San Francisco, USA",
-                 PASSWORD = "7777Fowler",
-                 EMAIL = "fowler@gmail.com";
+            SURNAME = "Fowler",
+            PHONE = "0887543534",
+            ADDRESS = "San Francisco, USA",
+            PASSWORD = "7777Fowler",
+            EMAIL = "fowler@gmail.com";
 
-    @Test public void testSaveClient() throws Exception {
+    @Test
+    public void testSaveClient() throws Exception {
 
         Client client = new Client(NAME, SURNAME, PHONE, ADDRESS, EMAIL, PASSWORD);
 
@@ -50,7 +48,8 @@ public class TestClientRepo extends TestContext {
         assertTrue(client.getCards().contains(card2));
     }
 
-    @Test public void testDeleteClient() throws Exception {
+    @Test
+    public void testDeleteClient() throws Exception {
 
         final Integer id = 1;
 
@@ -62,7 +61,8 @@ public class TestClientRepo extends TestContext {
             assertNotEquals(id, card.getClient().getId());
     }
 
-    @Test public void testUpdateClient() throws Exception {
+    @Test
+    public void testUpdateClient() throws Exception {
 
         final Integer idClient = 2, idBook = 8;
 
@@ -78,7 +78,8 @@ public class TestClientRepo extends TestContext {
         assertTrue(client.getCards().contains(card));
     }
 
-    @Test public void testLoadAllCards() throws Exception {
+    @Test
+    public void testLoadAllCards() throws Exception {
 
         final Integer id = 3;
 
@@ -88,7 +89,8 @@ public class TestClientRepo extends TestContext {
             assertEquals(id, card.getClient().getId());
     }
 
-    @Test public void testAuthentication() throws Exception {
+    @Test
+    public void testAuthentication() throws Exception {
 
         for (Client client : clientRepo.loadAll()) {
 

@@ -13,7 +13,7 @@ public class Util {
 
     private static final Logger log = Logger.getLogger(Util.class);
 
-    public static final String DATE_SEPARATOR = "-";
+    private static final String DATE_SEPARATOR = "-";
 
     private final static Random rand = new Random();
 

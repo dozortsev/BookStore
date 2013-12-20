@@ -20,6 +20,7 @@ public abstract class AbstractEntity<ID extends Serializable> implements Seriali
         return id;
     }
 
+    @SuppressWarnings("unused")
     public void setId(ID id) {
         this.id = id;
     }

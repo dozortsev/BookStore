@@ -13,7 +13,7 @@ public interface BaseRepo<ID extends Serializable, T extends AbstractEntity<ID>>
 
     public void delete(T model);
 
-    @Deprecated
+    @SuppressWarnings("unused")
     public void deleteById(ID id);
 
     public T update(T model);

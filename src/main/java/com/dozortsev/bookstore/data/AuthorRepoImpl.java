@@ -4,7 +4,6 @@ import com.dozortsev.bookstore.model.Author;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.transaction.annotation.Propagation.MANDATORY;
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
 

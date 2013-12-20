@@ -39,8 +39,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
         return factory.getCurrentSession();
     }
 
-    @Override
-    public ID save(T t) {
+    @Override public ID save(T t) {
         try {
             log.info(format("Saving new %s", getEntityName()));
             getSession().save(t);
@@ -53,8 +52,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     }
 
     @Transactional(readOnly = true)
-    @Override
-    public T load(ID id) {
+    @Override public T load(ID id) {
         try {
             log.info(format("Loading %s by Id: %s", getEntityName(), id));
             t = (T) getSession().get(getEntityClass(), id);
@@ -66,8 +64,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
         return t;
     }
 
-    @Override
-    public void delete(T t) {
+    @Override public void delete(T t) {
         try {
             log.info(format("Deleting %s. Id: %s", getEntityName(), t.getId()));
             getSession().delete(t);
@@ -78,8 +75,8 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
         }
     }
 
-    @Override
-    public void deleteById(ID id) {
+
+    @Override public void deleteById(ID id) {
         try {
             log.info(format("Deleting %s by Id: %s", getEntityName(), id));
             t = (T) getSession().get(getEntityClass(), id);
@@ -97,8 +94,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
         }
     }
 
-    @Override
-    public T update(T t) {
+    @Override public T update(T t) {
         try {
             log.info(format("Updating %s. Id: %s", getEntityName(), t.getId()));
             getSession().update(t);
@@ -111,8 +107,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     }
 
     @Transactional(readOnly = true)
-    @Override
-    public Set<T> loadAll() {
+    @Override public Set<T> loadAll() {
         Set<T> set = new LinkedHashSet<>();
         try {
             log.info(format("Loading all %ss", getEntityName()));
