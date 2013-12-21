@@ -18,7 +18,9 @@
         <input type="text" name="email" class="form-control" placeholder="Email *" maxlength=200 required autofocus>
         <input type="password" name="pwd" class="form-control" placeholder="Password *" maxlength=15 required>
 
-        <input type="submit" class="btn btn-lg btn-success btn-block" value="Sing In">
+        <button type="submit" class="btn btn-lg btn-success btn-block">
+            <fmt:message key="btn.signin"/>
+        </button>
 
         <a href="${path}/SignUp" class="btn btn-lg btn-primary btn-block">
             <fmt:message key="signin.btn.signup"/>
