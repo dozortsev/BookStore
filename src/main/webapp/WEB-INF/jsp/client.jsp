@@ -39,7 +39,7 @@
     <div class="jumbotron">
         <div class="row">
 
-            <div class="col-lg-4">
+            <div class="col-lg-4" title="<fmt:message key="ttl.client.you"/>">
                 <img src="img/user.png" width="230" height="210">
             </div>
 

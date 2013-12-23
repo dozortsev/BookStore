@@ -14,7 +14,8 @@
 
         <jsp:include page="Form"/>
         <br/>
-        <button class="btn btn-lg btn-success btn-block" onclick="alertBookstore('<fmt:message key="edit.msg.alert"/>')" type="submit">
+        <button class="btn btn-lg btn-success btn-block" title="<fmt:message key="ttl.save"/>"
+                onclick="alertBookstore('<fmt:message key="edit.msg.alert"/>')" type="submit">
             <fmt:message key="btn.save"/>
         </button>
 

@@ -22,7 +22,7 @@
             <fmt:message key="btn.signin"/>
         </button>
 
-        <a href="${path}/SignUp" class="btn btn-lg btn-primary btn-block">
+        <a href="${path}/SignUp" class="btn btn-lg btn-primary btn-block" title="<fmt:message key="ttl.new.acc"/>">
             <fmt:message key="signin.btn.signup"/>
         </a>
     </form:form>

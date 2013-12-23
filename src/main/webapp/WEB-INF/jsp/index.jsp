@@ -11,7 +11,7 @@
     <div class="header">
         <ul class="nav nav-pills pull-right">
             <li class="active">
-                <a href="${path}/Client">
+                <a href="${path}/Client" title="<fmt:message key="ttl.client.you"/>">
                     <span class="glyphicon glyphicon-user"></span>
                     &ensp;${client.name} ${client.surname}
                 </a>
@@ -33,7 +33,7 @@
             <fmt:message key="index.quote"/>
         </h1>
 
-        <p><a href="#Books">
+        <p><a href="#Books" title="<fmt:message key="ttl.showcase.book"/>">
             <span class="glyphicon glyphicon-circle-arrow-down"></span>
         </a></p>
     </div>
@@ -83,7 +83,7 @@
                         <fmt:message key="btn.buy"/>&ensp;
                         <fmt:formatNumber value="${book.price}" type="currency"/>
                     </a>
-                    <a href="${bookAction}false" class="btn btn-default">
+                    <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.add.book"/>">
                         <fmt:message key="btn.add"/>
                     </a>
                 </p><br/><br/>
