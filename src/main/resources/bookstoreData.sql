@@ -1,5 +1,5 @@
 INSERT INTO Author (Id, Name, Surname, DOB)
-  VALUE
+  VALUES
   (1, 'Arthur', 'Conan Doyle', '1859-04-22'),
   (2, 'William', 'Shakespeare', '1564-09-24'),
   (3, 'Carlos', 'Castaneda', '1925-12-25'),

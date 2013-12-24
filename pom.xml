@@ -27,6 +27,8 @@
 
         <mysql.connector.version>5.1.26</mysql.connector.version>
 
+        <hsql.connector.version>2.2.9</hsql.connector.version>
+
         <com.apache.log4j.version>1.2.14</com.apache.log4j.version>
 
         <org.slf4j.version>1.7.0</org.slf4j.version>
@@ -133,6 +135,15 @@
         </dependency>
 
 
+        <!-- HSQL -->
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsql.connector.version}</version>
+        </dependency>
+
+
         <!-- APACHE COMMONS -->
 
         <dependency>
@@ -149,12 +160,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${org.slf4j.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${com.apache.log4j.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -236,72 +241,6 @@
                 <version>7.5.Final</version>
             </plugin>
 
-
-            <!-- SQL Maven Plugin -->
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sql-maven-plugin</artifactId>
-                <version>1.5</version>
-
-                <!-- Specify the dependent jdbc driver -->
-
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.connector.version}</version>
-                    </dependency>
-                </dependencies>
-
-                <!-- Database configuration -->
-
-                <configuration>
-                    <driver>com.mysql.jdbc.Driver</driver>
-                    <url>${database.url}</url>
-                    <username>root</username>
-                </configuration>
-
-                <executions>
-                    <execution>
-                        <id>create-db-data-for-test</id>
-                        <phase>
-                            validate
-                        </phase>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                        <configuration>
-                            <url>${database.url}</url>
-                            <autocommit>true</autocommit>
-                            <srcFiles>
-                                <srcFile>${database.source.ddl}</srcFile>
-                                <srcFile>${database.source.data}</srcFile>
-                            </srcFiles>
-                            <onError>abort</onError>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>recreate-db</id>
-                        <phase>
-                            package
-                        </phase>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                        <configuration>
-                            <url>${database.url}</url>
-                            <autocommit>true</autocommit>
-                            <srcFiles>
-                                <srcFile>${database.source.ddl}</srcFile>
-                                <srcFile>${database.source.data}</srcFile>
-                            </srcFiles>
-                            <onError>abort</onError>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 </project>
