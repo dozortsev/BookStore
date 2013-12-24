@@ -25,11 +25,7 @@
 
         <servlet.jstl.version>1.2</servlet.jstl.version>
 
-        <mysql.connector.version>5.1.26</mysql.connector.version>
-
         <hsql.connector.version>2.2.9</hsql.connector.version>
-
-        <com.apache.log4j.version>1.2.14</com.apache.log4j.version>
 
         <org.slf4j.version>1.7.0</org.slf4j.version>
 
@@ -37,23 +33,11 @@
 
         <org.junit.version>4.11</org.junit.version>
 
-        <database.url>
-            jdbc:mysql://localhost:3306/BookStore
-        </database.url>
-
-        <database.source.ddl>
-            src/main/resources/bookstoreDDL.sql
-        </database.source.ddl>
-
-        <database.source.data>
-            src/main/resources/bookstoreData.sql
-        </database.source.data>
-
     </properties>
 
     <dependencies>
 
-        <!-- SPRING FRAMEWORK -->
+        <!-- SPRING -->
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -122,16 +106,6 @@
             <artifactId>junit</artifactId>
             <version>${org.junit.version}</version>
             <scope>test</scope>
-        </dependency>
-
-
-        <!-- MYSQL CONNECTOR -->
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.connector.version}</version>
-            <scope>runtime</scope>
         </dependency>
 
 
