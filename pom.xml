@@ -151,13 +151,6 @@
             <version>${org.slf4j.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${com.apache.log4j.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
 
         <!-- SERVLET -->
 
