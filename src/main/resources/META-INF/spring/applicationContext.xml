@@ -11,12 +11,12 @@
                            http://www.springframework.org/schema/jdbc
                            http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <!-- Data Source properties -->
+    <!-- Data Source for Produce -->
 
-    <jdbc:embedded-database id="dataSource" type="HSQL">
+    <jdbc:embedded-database id="dataSourceProduce" type="HSQL">
 
-        <jdbc:script location="bookstoreDDL.sql" />
-        <jdbc:script location="bookstoreData.sql" />
+        <jdbc:script location="classpath:bookstoreDDL.sql" />
+        <jdbc:script location="classpath:bookstoreData.sql" />
 
     </jdbc:embedded-database>
 
@@ -25,13 +25,13 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dataSourceProduce"/>
 
         <property name="packagesToScan" value="com.dozortsev.bookstore.model"/>
 
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>
     </bean>
