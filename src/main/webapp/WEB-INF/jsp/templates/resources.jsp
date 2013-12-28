@@ -20,12 +20,15 @@
 <script src="js/bootstrap.js"></script>
 
 
+<%-- jQuery --%>
+
+<script src="jquery/jquery-1.10.1.min.js"></script>
+
+
 <!-- CSS -->
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
-
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 
