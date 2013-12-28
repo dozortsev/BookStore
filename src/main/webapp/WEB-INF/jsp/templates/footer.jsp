@@ -4,9 +4,8 @@
 
     <ul class="nav nav-pills pull-right">
         <li>
-            <a href="https://github.com/Ant10/BookStore" target="_blank">
-                <img src="img/github.png" height="20px" width="20px"
-                     title="<fmt:message key="ttl.github"/>" />
+            <a href="https://github.com/Ant10/BookStore" target="_blank" title="<fmt:message key="ttl.github"/>">
+                <img src="img/github.png" height="20px" width="20px"/>
             </a>
         </li>
         <li>
