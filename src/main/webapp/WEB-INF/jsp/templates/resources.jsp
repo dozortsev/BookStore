@@ -17,6 +17,7 @@
 <%-- JS --%>
 
 <script src="js/functions.js"></script>
+<script src="js/bootstrap.js"></script>
 
 
 <!-- CSS -->

@@ -51,33 +51,10 @@
 
             <div class="col-md-4">
 
-                <h3><b>${book.name}</b></h3>
+                <h4><b>${book.name}</b></h4>
                 <p>
-                <div class="list-group">
-                    <a class="list-group-item">
-                        <i>${fn:substring(book.description, 0, 300)}&hellip;</i>
-                    </a>
-                    <a class="list-group-item">
-                        <span class="badge">${author.name} ${author.surname}</span>
-                        <b><fmt:message key="index.lbl.author"/></b>
-                    </a>
-                    <a class="list-group-item">
-                        <span class="badge">${book.genre}</span>
-                        <fmt:message key="index.lbl.genre"/>
-                    </a>
-                    <a class="list-group-item">
-                        <span class="badge">${book.language}</span>
-                        <fmt:message key="index.lbl.lang"/>
-                    </a>
-                    <a class="list-group-item">
-                        <span class="badge"><fmt:formatDate value="${book.pubDate}"/></span>
-                        <fmt:message key="index.lbl.pdate"/>
-                    </a>
-                    <a class="list-group-item">
-                        <span class="badge">${book.pages}</span>
-                        <fmt:message key="index.lbl.pages"/>
-                    </a>
-                </div>
+                    <i>${fn:substring(book.description, 0, 100)}&hellip;</i>
+                </p>
                 <p>
                     <a href="${bookAction}true" class="btn btn-primary">
                         <fmt:message key="btn.buy"/>&ensp;
@@ -86,7 +63,30 @@
                     <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.add.book"/>">
                         <fmt:message key="btn.add"/>
                     </a>
-                </p><br/><br/>
+                </p>
+
+                <!-- Button trigger modal -->
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#bookModal${book.id}">
+                    Launch demo modal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="bookModal${book.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">${book.name}</h4>
+                            </div>
+                            <div class="modal-body">
+                                It's work !
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </c:forEach>
     </div>
