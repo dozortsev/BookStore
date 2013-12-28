@@ -13,29 +13,26 @@
 
 <c:set value="${pageContext.request.contextPath}" var="path"/>
 
+<head>
 
-<%-- JS --%>
-
-<script src="js/functions.js"></script>
-<script src="js/bootstrap.js"></script>
-
-
-<%-- jQuery --%>
-
-<script src="jquery/jquery-1.10.1.min.js"></script>
+    <!-- CSS -->
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 
-<!-- CSS -->
-
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <%-- jQuery --%>
+    <script src="jquery/jquery-1.10.1.min.js" type="text/javascript"></script>
 
 
+    <%-- JS --%>
+    <script src="js/functions.js" type="text/javascript" ></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
 
-<%-- Icon --%>
 
-<link href="img/icon.png" rel="icon" type="image/png">
+    <%-- Icon --%>
+    <link href="img/icon.png" rel="icon" type="image/png">
+</head>
 
 
 
