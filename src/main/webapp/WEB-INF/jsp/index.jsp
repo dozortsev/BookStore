@@ -53,7 +53,7 @@
 
             <div class="col-md-4">
                 <h4>
-                    <b>${book.name}</b><br/>
+                    <b>${book.name}</b><br/><br/>
                     <small>${author.name}&ensp;${author.surname}</small>
                 </h4>
                 <p>
