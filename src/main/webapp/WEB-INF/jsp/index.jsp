@@ -40,7 +40,7 @@
 </div>
 
 <div id="Books" class="container">
-
+    <br/>
     <div class="row">
 
         <c:forEach items="${books}" var="book">
@@ -49,40 +49,75 @@
 
             <c:set var="bookAction" value="${path}/Client/Book/${book.id}/Status/"/>
 
-            <div class="col-md-4">
+            <c:set var="bookModal" value="bookModal${book.id}"/>
 
-                <h4><b>${book.name}</b></h4>
+            <div class="col-md-4">
+                <h4>
+                    <b>${book.name}</b><br/>
+                    <small>${author.name}&ensp;${author.surname}</small>
+                </h4>
                 <p>
-                    <i>${fn:substring(book.description, 0, 100)}&hellip;</i>
+                    <i>${fn:substring(book.description, 0, 200)}&hellip;</i>
                 </p>
                 <p>
-                    <a href="${bookAction}true" class="btn btn-primary">
-                        <fmt:message key="btn.buy"/>&ensp;
+                    <a href="${bookAction}true" class="btn btn-success" title="<fmt:message key="ttl.book.buy"/>">
+                        <b><fmt:message key="btn.buy"/></b>&ensp;
                         <fmt:formatNumber value="${book.price}" type="currency"/>
                     </a>
-                    <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.add.book"/>">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#${bookModal}"
+                            title="<fmt:message key="ttl.book.more"/>">
+                        <span class="glyphicon glyphicon-align-center"></span>
+                        <fmt:message key="btn.show"/>
+                    </button>
+                    <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.book.add"/>">
+                        <span class="glyphicon glyphicon-plus"></span>
                         <fmt:message key="btn.add"/>
                     </a>
                 </p>
 
-                <!-- Button trigger modal -->
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#bookModal${book.id}">
-                    Launch demo modal
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="bookModal${book.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="${bookModal}" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel">${book.name}</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <br/>
+                                <h3 class="modal-title"><b>${book.name}</b></h3>
                             </div>
                             <div class="modal-body">
-                                It's work !
+                                <div class="list-group">
+                                    <a class="list-group-item">
+                                        <i>${book.description}</i>
+                                    </a>
+                                    <a class="list-group-item">
+                                        <span class="badge">${author.name} ${author.surname}</span>
+                                        <b><fmt:message key="index.lbl.author"/></b>
+                                    </a>
+                                    <a class="list-group-item">
+                                        <span class="badge">${book.genre}</span>
+                                        <fmt:message key="index.lbl.genre"/>
+                                    </a>
+                                    <a class="list-group-item">
+                                        <span class="badge">${book.language}</span>
+                                        <fmt:message key="index.lbl.lang"/>
+                                    </a>
+                                    <a class="list-group-item">
+                                        <span class="badge"><fmt:formatDate value="${book.pubDate}"/></span>
+                                        <fmt:message key="index.lbl.pdate"/>
+                                    </a>
+                                    <a class="list-group-item">
+                                        <span class="badge">${book.pages}</span>
+                                        <fmt:message key="index.lbl.pages"/>
+                                    </a>
+                                </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <a href="${bookAction}true" class="btn btn-primary">
+                                        <fmt:message key="btn.buy"/>&ensp;
+                                    <fmt:formatNumber value="${book.price}" type="currency"/>
+                                </a>
+                                <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.add.book"/>">
+                                    <fmt:message key="btn.add"/>
+                                </a>
                             </div>
                         </div>
                     </div>

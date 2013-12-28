@@ -18,7 +18,7 @@
     <!-- CSS -->
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <%--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">--%>
 
 
     <%-- jQuery --%>
@@ -28,6 +28,7 @@
     <%-- JS --%>
     <script src="js/functions.js" type="text/javascript" ></script>
     <script src="js/bootstrap.js" type="text/javascript"></script>
+    <%--<script src="js/bootstrap.min.js" type="text/javascript"></script>--%>
 
 
     <%-- Icon --%>

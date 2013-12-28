@@ -15,6 +15,6 @@
         </li>
     </ul>
     <h4>
-        &copy;&ensp;2013&ensp;<fmt:message key="project.name"/>&middot;
+        &copy;&ensp;2013&ensp;<fmt:message key="project.name"/>
     </h4>
 </div>
