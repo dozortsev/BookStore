@@ -115,7 +115,7 @@
                                         <fmt:message key="btn.buy"/>&ensp;
                                     <fmt:formatNumber value="${book.price}" type="currency"/>
                                 </a>
-                                <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.add.book"/>">
+                                <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.book.add"/>">
                                     <fmt:message key="btn.add"/>
                                 </a>
                             </div>
