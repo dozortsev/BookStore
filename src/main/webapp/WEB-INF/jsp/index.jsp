@@ -30,7 +30,7 @@
 <div class="jumbotron img-background">
     <div class="container">
         <h1>
-            <fmt:message key="index.quote"/>
+            Hi&ensp;${client.name}!&ensp;<fmt:message key="index.msg.welcome"/>
         </h1>
 
         <p><a href="#Books" title="<fmt:message key="ttl.showcase.book"/>">
@@ -112,7 +112,7 @@
                             </div>
                             <div class="modal-footer">
                                 <a href="${bookAction}true" class="btn btn-primary">
-                                        <fmt:message key="btn.buy"/>&ensp;
+                                        <b><fmt:message key="btn.buy"/></b>&ensp;
                                     <fmt:formatNumber value="${book.price}" type="currency"/>
                                 </a>
                                 <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.book.add"/>">
