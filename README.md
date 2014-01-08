@@ -52,6 +52,21 @@ Undeploy the Archive and Shutdown JBoss AS
         For Linux:   JBOSS_HOME/bin/jboss-cli.sh --connect command=:shutdown
         For Windows: JBOSS_HOME\bin\jboss-cli.bat --connect command=:shutdown
 
+Versioning
+----------
+
+For transparency into our release cycle and in striving to maintain backward compatibility,
+BookStore is maintained under the [Semantic Versioning][4] guidelines.
+
+Releases will be numbered with the following format: `<major>.<minor>.<patch>`
+
+Author
+------
+
+**Dozortsev Anton**
+
+
 [1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.
 [2]: http://maven.apache.org/download.cgi
 [3]: http://www.jboss.org/jbossas/downloads/
+[4]: http://semver.org/
