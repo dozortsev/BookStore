@@ -15,9 +15,15 @@
 
         <h2 class="form-signin-heading"><fmt:message key="signin.header"/></h2>
 
-        <input type="text" name="email" class="form-control" placeholder="Email *" maxlength=200 required autofocus>
-        <input type="password" name="pwd" class="form-control" placeholder="Password *" maxlength=15 required>
-
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+            <input type="text" name="email" class="form-control" placeholder="Email *" maxlength=200 required autofocus>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+            <input type="text" name="pwd" class="form-control" placeholder="Password *" maxlength=15 required>
+        </div>
+        <br/>
         <button type="submit" class="btn btn-lg btn-success btn-block">
             <fmt:message key="btn.signin"/>
         </button>
