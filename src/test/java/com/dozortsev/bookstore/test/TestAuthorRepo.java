@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class TestAuthorRepo extends TestContext {
 
-    @Test public void testDeleteAuthor() throws Exception {
+    @Test public void testDeleteAuthor() {
 
         final Integer id = 2;
 

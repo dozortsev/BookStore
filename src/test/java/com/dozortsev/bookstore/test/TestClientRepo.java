@@ -18,8 +18,7 @@ public class TestClientRepo extends TestContext {
             PASSWORD = "7777Fowler",
             EMAIL = "fowler@gmail.com";
 
-    @Test
-    public void testSaveClient() throws Exception {
+    @Test public void testSaveClient() {
 
         Client client = new Client(NAME, SURNAME, PHONE, ADDRESS, EMAIL, PASSWORD);
 
@@ -48,8 +47,7 @@ public class TestClientRepo extends TestContext {
         assertTrue(client.getCards().contains(card2));
     }
 
-    @Test
-    public void testDeleteClient() throws Exception {
+    @Test public void testDeleteClient() {
 
         final Integer id = 1;
 
@@ -61,8 +59,7 @@ public class TestClientRepo extends TestContext {
             assertNotEquals(id, card.getClient().getId());
     }
 
-    @Test
-    public void testUpdateClient() throws Exception {
+    @Test public void testUpdateClient() {
 
         final Integer idClient = 2, idBook = 8;
 
@@ -78,8 +75,7 @@ public class TestClientRepo extends TestContext {
         assertTrue(client.getCards().contains(card));
     }
 
-    @Test
-    public void testLoadAllCards() throws Exception {
+    @Test public void testLoadAllCards() {
 
         final Integer id = 3;
 
@@ -89,8 +85,7 @@ public class TestClientRepo extends TestContext {
             assertEquals(id, card.getClient().getId());
     }
 
-    @Test
-    public void testAuthentication() throws Exception {
+    @Test public void testAuthentication() {
 
         for (Client client : clientRepo.loadAll()) {
 

@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNull;
 
 public class TestBookRepo extends TestContext {
 
-    @Test public void testLoadBook() throws Exception {
+    @Test public void testLoadBook() {
 
         Book book = bookRepo.load(1);
 
@@ -16,7 +16,7 @@ public class TestBookRepo extends TestContext {
         assertNotNull(book.getAuthor());
     }
 
-    @Test public void testDeleteBook() throws Exception {
+    @Test public void testDeleteBook() {
 
         final Integer idBook = 7;
 

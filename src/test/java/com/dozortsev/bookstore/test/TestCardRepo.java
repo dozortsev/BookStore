@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class TestCardRepo extends TestContext {
 
-    @Test public void testSaveCard() throws Exception {
+    @Test public void testSaveCard() {
 
         final Integer idClient = 7, idBook = 3;
 
@@ -30,7 +30,7 @@ public class TestCardRepo extends TestContext {
         assertTrue(client.getCards().contains(card));
     }
 
-    @Test public void testLoadCard() throws Exception {
+    @Test public void testLoadCard() {
 
         final Integer idCard = 4;
 
@@ -46,7 +46,7 @@ public class TestCardRepo extends TestContext {
         assertEquals(client, card.getClient());
     }
 
-    @Test public void testDeleteCard() throws Exception {
+    @Test public void testDeleteCard() {
 
         final Integer idCard = 17;
 
@@ -66,7 +66,7 @@ public class TestCardRepo extends TestContext {
         assertFalse(client.getCards().contains(card));
     }
 
-    @Test public void testRemoveAll() throws Exception {
+    @Test public void testRemoveAll() {
 
         Set<Book> books = bookRepo.loadAll();
         assertNotNull(books);
