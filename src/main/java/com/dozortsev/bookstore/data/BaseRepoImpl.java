@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -62,6 +63,26 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
             log.error("Error:", e);
         }
         return t;
+    }
+
+    @Override public T get(Collection<T> c, ID id) {
+        try {
+            log.info(format("Getting %s by Id: %s", getEntityName(), id));
+            if (c == null) {
+                log.info(format("Collections of the %ss is null", getEntityName()));
+                return null;
+            }
+            for (T model : c) {
+                if (model.getId().equals(id)) {
+                    log.info("Successful founded");
+                    return model;
+                }
+            }
+            log.info(format("%s with Id: %s not exist", getEntityName(), id));
+        } catch (HibernateException e) {
+            log.error("Error:", e);
+        }
+        return null;
     }
 
     @Override public void delete(T t) {

@@ -85,6 +85,25 @@ public class TestClientRepo extends TestContext {
             assertEquals(id, card.getClient().getId());
     }
 
+    @Test public void testGetClient() {
+
+        final Integer id = 3;
+        final Set<Client> clients = clientRepo.loadAll();
+
+        Client client = clientRepo.get(clients, id);
+        assertNotNull(client);
+        assertNotNull(client.getCards());
+        assertNotEquals(0 , client.getCards().size());
+
+
+        Client expClient = clientRepo.load(id);
+        assertEquals(expClient, client);
+        assertEquals(expClient.getCards(), client.getCards());
+        assertEquals(expClient.getCards().size(), client.getCards().size());
+
+        assertNull(clientRepo.get(clients, 100));
+    }
+
     @Test public void testAuthentication() {
 
         for (Client client : clientRepo.loadAll()) {
