@@ -82,7 +82,7 @@
 
 <div class="row marketing">
 
-    <c:if test="${ not empty client.cards}">
+    <c:if test="${ not empty client.cards }">
 
         <div class="col-lg-12">
 
@@ -106,7 +106,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <a href="${cardAction}false">
+                            <a href="${cardAction}false" title="<fmt:message key="client.ttl.card.del"/>">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </a>
                         </td>
