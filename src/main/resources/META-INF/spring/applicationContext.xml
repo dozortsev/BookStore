@@ -13,25 +13,25 @@
 
     <!-- Data Source for Produce -->
 
-    <jdbc:embedded-database id="dataSourceProduce" type="HSQL">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 
-        <jdbc:script location="classpath:bookstoreDDL.sql" />
-        <jdbc:script location="classpath:bookstoreData.sql" />
-
-    </jdbc:embedded-database>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/BookStore"/>
+        <property name="username" value="root"/>
+    </bean>
 
 
     <!-- Configure the Hibernate SessionFactory -->
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 
-        <property name="dataSource" ref="dataSourceProduce"/>
+        <property name="dataSource" ref="dataSource"/>
 
         <property name="packagesToScan" value="com.dozortsev.bookstore.model"/>
 
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
     </bean>

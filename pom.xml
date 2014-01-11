@@ -27,13 +27,33 @@
 
         <servlet.jstl.version>1.2</servlet.jstl.version>
 
-        <hsql.connector.version>2.2.9</hsql.connector.version>
+        <mysql.version>5.1.28</mysql.version>
 
         <org.slf4j.version>1.7.0</org.slf4j.version>
 
         <org.apache.commons.version>1.4</org.apache.commons.version>
 
         <org.junit.version>4.11</org.junit.version>
+
+        <database.url>
+            jdbc:mysql://localhost:3306/BookStore
+        </database.url>
+
+        <db.source.produce.ddl>
+            src/main/resources/bookstoreDDL.sql
+        </db.source.produce.ddl>
+
+        <db.source.produce.data>
+            src/main/resources/bookstoreData.sql
+        </db.source.produce.data>
+
+        <db.source.test.ddl>
+            src/test/resources/dbDDLTest.sql
+        </db.source.test.ddl>
+
+        <db.source.test.data>
+            src/test/resources/dbDataTest.sql
+        </db.source.test.data>
 
     </properties>
 
@@ -123,12 +143,12 @@
         </dependency>
 
 
-        <!-- HSQL -->
+        <!-- MYSQL CONNECTOR -->
 
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>${hsql.connector.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>
 
 
@@ -151,7 +171,7 @@
             <scope>provided</scope>
         </dependency>
 
-        
+
         <!-- SERVLET -->
 
         <dependency>
@@ -227,6 +247,72 @@
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>7.5.Final</version>
+            </plugin>
+
+            <!-- SQL Maven Plugin -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+
+                <!-- Specify the dependent jdbc driver -->
+
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                </dependencies>
+
+                <!-- Database configuration -->
+
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>${database.url}</url>
+                    <username>root</username>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>createdbdatafortest</id>
+                        <phase>
+                            validate
+                        </phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>${database.url}</url>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>${db.source.test.ddl}</srcFile>
+                                <srcFile>${db.source.test.data}</srcFile>
+                            </srcFiles>
+                            <onError>abort</onError>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>recreatedb</id>
+                        <phase>
+                            package
+                        </phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>${database.url}</url>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>${db.source.produce.ddl}</srcFile>
+                                <srcFile>${db.source.produce.data}</srcFile>
+                            </srcFiles>
+                            <onError>abort</onError>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

@@ -5,7 +5,7 @@ BookStore
 System requirements
 -------------------
 
-All you need to build this project is Java 7.0 ([Java SDK 1.7][1]), [Apache Maven 3.1.1][2] and [JBoss AS 7.1.1.Final][3].
+All you need to build this project is Java 7.0 ([Java SDK 1.7][1]), [MySQL][5], [Apache Maven 3.1.1][2] and [JBoss AS 7.1.1.Final][3].
 
 The application this project produces is designed to be run on JBoss AS 7.
 
@@ -70,3 +70,4 @@ Author
 [2]: http://maven.apache.org/download.cgi
 [3]: http://www.jboss.org/jbossas/downloads/
 [4]: http://semver.org/
+[5]: http://dev.mysql.com/downloads/mysql/#current-tab
