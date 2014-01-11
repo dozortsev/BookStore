@@ -53,6 +53,13 @@
                     &ensp;<span class="label label-default">${client.surname}</span>
                 </h3>
                 <h3>
+                    <fmt:message key="client.lbl.joined"/>
+                    &ensp;
+                    <span class="label label-default">
+                        <fmt:formatDate type="both" pattern="yyyy-MM-dd / HH:mm" value="${client.joined}"/>
+                    </span>
+                </h3>
+                <h3>
                     <c:if test="${ not empty client.address}">
                         <fmt:message key="client.lbl.address"/>
                         &ensp;<span class="label label-default">${client.address}</span>

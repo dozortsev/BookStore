@@ -4,6 +4,7 @@ import com.dozortsev.bookstore.model.Card;
 import com.dozortsev.bookstore.model.Client;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class TestClientRepo extends TestContext {
 
     @Test public void testSaveClient() {
 
-        Client client = new Client(NAME, SURNAME, PHONE, ADDRESS, EMAIL, PASSWORD);
+        final Client client = new Client(NAME, SURNAME, PHONE, ADDRESS, EMAIL, PASSWORD);
 
         Set<Card> cards = new LinkedHashSet<>();
         Card card1 = new Card(client, bookRepo.load(1), false);
@@ -35,13 +36,13 @@ public class TestClientRepo extends TestContext {
         clientRepo.save(client);
         assertNotNull(client.getId());
 
-        client = clientRepo.load(client.getId());
+        Client expClient = clientRepo.load(client.getId());
 
-        assertEquals(NAME, client.getName());
-        assertEquals(SURNAME, client.getSurname());
-        assertEquals(PHONE, client.getPhone());
-        assertEquals(EMAIL, client.getEmail());
-        assertEquals(PASSWORD, client.getPassword());
+        assertEquals(NAME, expClient.getName());
+        assertEquals(SURNAME, expClient.getSurname());
+        assertEquals(PHONE, expClient.getPhone());
+        assertEquals(EMAIL, expClient.getEmail());
+        assertEquals(PASSWORD, expClient.getPassword());
 
         assertTrue(client.getCards().contains(card1));
         assertTrue(client.getCards().contains(card2));
@@ -63,16 +64,19 @@ public class TestClientRepo extends TestContext {
 
         final Integer idClient = 2, idBook = 8;
 
-        Client client = clientRepo.load(idClient);
+        final Client client = clientRepo.load(idClient);
         assertNotNull(client);
+        final Date joined = client.getJoined();
+        assertNotNull("Joined field is null", joined);
 
         Card card = new Card(client, bookRepo.load(idBook), true);
         client.getCards().add(card);
 
         clientRepo.update(client);
 
-        client = clientRepo.load(idClient);
-        assertTrue(client.getCards().contains(card));
+        Client expClient = clientRepo.load(idClient);
+        assertTrue(expClient.getCards().contains(card));
+        assertEquals(joined, expClient.getJoined());
     }
 
     @Test public void testLoadAllCards() {

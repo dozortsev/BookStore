@@ -28,4 +28,3 @@
 <%-- Icon --%>
 <link href="img/icon.png" rel="icon" type="image/png">
 
-

@@ -2,14 +2,13 @@ package com.dozortsev.bookstore.model;
 
 import org.hibernate.annotations.Cascade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.TemporalType.TIMESTAMP;
 import static org.hibernate.annotations.CascadeType.DELETE;
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
@@ -22,6 +21,10 @@ public class Client extends AbstractEntity<Integer> {
 
     @Column(name = "Surname", length = 100, nullable = false)
     private String surname;
+
+    @Column(name = "Joined", updatable = false, nullable = false)
+    @Temporal(TIMESTAMP)
+    private Date joined;
 
     @Column(name = "Address", length = 200)
     private String address;
@@ -41,11 +44,13 @@ public class Client extends AbstractEntity<Integer> {
 
 
     public Client() {
+        joined = new Date();
     }
 
     public Client(String name, String surname, String phone, String address, String email, String password) {
         this.name = name;
         this.surname = surname;
+        joined = new Date();
         this.phone = phone;
         this.address = address;
         this.email = email;
@@ -64,6 +69,14 @@ public class Client extends AbstractEntity<Integer> {
     }
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Date getJoined() {
+        return joined;
+    }
+    @SuppressWarnings("unused")
+    public void setJoined(Date joined) {
+        this.joined = joined;
     }
 
     public String getAddress() {
