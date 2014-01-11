@@ -39,7 +39,7 @@
     <div class="jumbotron">
         <div class="row">
 
-            <div class="col-lg-4" title="<fmt:message key="ttl.client.you"/>">
+            <div class="col-lg-4">
             <img src="img/user.png" width="230" height="210">
         </div>
 
@@ -89,7 +89,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>
+                    <th title="<fmt:message key="client.ttl.card.size"/>">
                         <span class="glyphicon glyphicon-book"></span>
                         &ensp;${fn:length(client.cards)}
                     </th>

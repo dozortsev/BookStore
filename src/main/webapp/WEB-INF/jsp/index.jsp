@@ -11,7 +11,7 @@
     <div class="header">
         <ul class="nav nav-pills pull-right">
             <li class="active">
-                <a href="${path}/Client" title="<fmt:message key="ttl.client.you"/>">
+                <a href="${path}/Client">
                     <span class="glyphicon glyphicon-user"></span>
                     &ensp;${client.name} ${client.surname}
                 </a>
