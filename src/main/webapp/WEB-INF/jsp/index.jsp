@@ -57,18 +57,18 @@
                     <small>${author.name}&ensp;${author.surname}</small>
                 </h4>
                 <p>
-                    <i>${fn:substring(book.description, 0, 200)}&hellip;</i>
+                    <i>
+                    ${fn:substring(book.description, 0, 200)}&ensp;&hellip;&ensp;
+                        <a href="#" title="<fmt:message key="ttl.book.more"/>" data-toggle="modal" data-target="#${bookModal}">
+                            <fmt:message key="btn.show"/>&ensp;<span class="glyphicon glyphicon glyphicon-arrow-right"></span>
+                        </a>
+                    </i>
                 </p>
                 <p>
-                    <a href="${bookAction}true" class="btn btn-success" title="<fmt:message key="ttl.book.buy"/>">
+                    <a href="${bookAction}true" class="btn btn-primary" title="<fmt:message key="ttl.book.buy"/>">
                         <b><fmt:message key="btn.buy"/></b>&ensp;
                         <fmt:formatNumber value="${book.price}" type="currency"/>
                     </a>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#${bookModal}"
-                            title="<fmt:message key="ttl.book.more"/>">
-                        <span class="glyphicon glyphicon-align-center"></span>
-                        <fmt:message key="btn.show"/>
-                    </button>
                     <a href="${bookAction}false" class="btn btn-default" title="<fmt:message key="ttl.book.add"/>">
                         <span class="glyphicon glyphicon-plus"></span>
                         <fmt:message key="btn.add"/>
