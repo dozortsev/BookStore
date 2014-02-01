@@ -29,11 +29,3 @@ target/
 
 # Linux #
 *~
-
-
-# Windows #
-$RECYCLE.BIN/
-*.cab
-*.msi
-*.msm
-*.msp
