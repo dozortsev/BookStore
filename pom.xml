@@ -13,6 +13,8 @@
 
     <!-- todo: JBoss log4j configuration http://goo.gl/IX4Cyh -->
 
+    <!-- todo: read about Git commands: pull, fetch and clone / @date - 01 Feb 14 2:49 PM -->
+
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
