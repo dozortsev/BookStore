@@ -20,6 +20,4 @@ public abstract class TestContext {
     @Autowired protected AuthorRepo authorRepo;
 
     @Autowired protected ClientRepo clientRepo;
-
-    /* todo: add messages on test classes */
 }
