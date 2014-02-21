@@ -68,7 +68,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
     @Override public T get(Collection<T> c, ID id) {
         try {
             log.info(format("Getting %s by Id: %s", getEntityName(), id));
-            if (c == null) {
+            if (c == null || c.isEmpty()) {
                 log.info(format("Collections of the %ss is null", getEntityName()));
                 return null;
             }
@@ -78,7 +78,7 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
                     return model;
                 }
             }
-            log.info(format("%s with Id: %s not exist", getEntityName(), id));
+            log.info(format("%s with Id: %s not found", getEntityName(), id));
         } catch (HibernateException e) {
             log.error("Error:", e);
         }
@@ -103,12 +103,11 @@ public class BaseRepoImpl<ID extends Serializable, T extends AbstractEntity<ID>>
             t = (T) getSession().get(getEntityClass(), id);
 
             if (t != null) {
-                log.info(format("%s successful loaded", getEntityName()));
                 getSession().delete(t);
                 log.info("Successful deleted");
                 return;
             }
-            log.info(format("%s not loaded", getEntityName()));
+            log.info(format("%s not exist", getEntityName()));
 
         } catch (HibernateException e) {
             log.error("Error:", e);
