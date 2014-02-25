@@ -13,6 +13,11 @@ out/
 .loadpath
 
 
+# JRebel #
+
+rebel.xml
+
+
 # Java #
 *.class
 
