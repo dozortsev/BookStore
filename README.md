@@ -66,7 +66,7 @@ Author
 **Dozortsev Anton**
 
 
-[1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.
+[1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
 [2]: http://maven.apache.org/download.cgi
 [3]: http://www.jboss.org/jbossas/downloads/
 [4]: http://semver.org/
