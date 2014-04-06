@@ -8,8 +8,7 @@ import java.util.Calendar;
 
 import static javax.persistence.TemporalType.DATE;
 
-@Entity
-@Table(name = "Author")
+@Entity @Table(name = "Author")
 public class Author extends AbstractEntity<Integer> {
 
     @Column(name = "Name", length = 100, nullable = false)

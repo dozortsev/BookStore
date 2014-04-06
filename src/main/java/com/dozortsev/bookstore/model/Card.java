@@ -2,8 +2,7 @@ package com.dozortsev.bookstore.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "Card")
+@Entity @Table(name = "Card")
 public class Card extends AbstractEntity<Integer> {
 
     @Embedded

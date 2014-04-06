@@ -12,8 +12,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 import static org.hibernate.annotations.CascadeType.DELETE;
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
-@Entity
-@Table(name = "Client")
+@Entity @Table(name = "Client")
 public class Client extends AbstractEntity<Integer> {
 
     @Column(name = "Name", length = 100, nullable = false)

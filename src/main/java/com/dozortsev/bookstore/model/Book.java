@@ -6,8 +6,7 @@ import java.util.Date;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.TemporalType.DATE;
 
-@Entity
-@Table(name = "Book")
+@Entity @Table(name = "Book")
 public class Book extends AbstractEntity<Integer> {
 
     @Column(name = "Name", length = 255, nullable = false)
