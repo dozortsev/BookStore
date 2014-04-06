@@ -47,9 +47,9 @@ public class Client extends AbstractEntity<Integer> {
     }
 
     public Client(String name, String surname, String phone, String address, String email, String password) {
+        this();
         this.name = name;
         this.surname = surname;
-        joined = new Date();
         this.phone = phone;
         this.address = address;
         this.email = email;
