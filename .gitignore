@@ -34,3 +34,10 @@ target/
 
 # Linux #
 *~
+
+
+# OS X #
+._*
+.DS_Store
+.AppleDouble
+.LSOverride
