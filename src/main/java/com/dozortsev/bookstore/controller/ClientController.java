@@ -30,7 +30,7 @@ public class ClientController {
     @Autowired
     BookRepo bookRepo;
 
-    private final static Logger log = getLogger(ClientController.class);
+//    private final static Logger log = getLogger(ClientController.class);
 
     @RequestMapping(value = "/toShowcase", method = GET)
     public ModelAndView backToShowcase(@ModelAttribute Client client) {
